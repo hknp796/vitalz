@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "../assets/workout.jpeg";
-
 function Home() {
   return (
     <div>
