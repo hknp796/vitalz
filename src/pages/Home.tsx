@@ -1,29 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Image from "../assets/workout.jpeg";
+import { getBodyparts } from "../api/rapidapi";
 import axios from "axios";
-import { AxiosRequestConfig } from "axios";
+
 function Home() {
-  async function getDate() {
-    const options = {
-      headers: {
-        "X-RapidAPI-Key": "361da33457msh321bb58d0e43461p1ecf11jsn542819c4b882",
-        "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
-      },
-    };
-    const a = await axios.get(
-      "https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
-      options
-    ); // pass url property to axios.get()
-
-    console.log({ a });
-
-    return a;
-  }
-
   useEffect(() => {
-    getDate(); // call the getDate function here
+    async function fetchData() {
+      const a = await getBodyparts();
+      console.log({ a });
+    }
+    fetchData();
   }, []);
-
   return (
     <div>
       <div className="flex justify-around items-center h-full">
