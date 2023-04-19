@@ -8,6 +8,7 @@ function Home() {
     async function fetchData() {
       const a = await getBodyparts();
       console.log({ a });
+      console.log({ a });
     }
     fetchData();
   }, []);
