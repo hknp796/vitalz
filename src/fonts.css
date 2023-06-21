@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'main-regular';
+  src: url('./fonts/MonumentExtended-Regular.otf') format('opentype');
+  /* Add more formats if required */
+  /* Specify other font properties if needed */
+}
+@font-face {
+  font-family: 'main-bold';
+  src: url('./fonts/MonumentExtended-ultrabold.otf') format('opentype');
+  /* Add more formats if required */
+  /* Specify other font properties if needed */
+}
+
+
+.button{
+    font-family:'main-bold',sans-serif
+}

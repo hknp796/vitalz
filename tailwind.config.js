@@ -7,6 +7,11 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      fontFamily: {
+        main: ["Monument Extended"],
+      },
+    },
   },
   plugins: [require("flowbite/plugin")],
 };
