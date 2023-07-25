@@ -4,14 +4,12 @@ import { getBodyparts } from "../api/rapidapi";
 import axios from "axios";
 
 function Home() {
-  useEffect(() => {
-    async function fetchData() {
-      const a = await getBodyparts();
-      console.log({ a });
-      console.log({ a });
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const a = await getBodyparts();
+  //   }
+  //   fetchData();
+  // }, []);
   return (
     <div>
       <div className="flex justify-around items-center h-full">
