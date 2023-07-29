@@ -5,7 +5,7 @@ import "./fonts.css";
 
 function App() {
   return (
-    <div style={{ fontFamily: "main-regular, sans-serif" }}>
+    <div style={{ backgroundColor: "red" }}>
       <Navbar />
       <Home />
     </div>
