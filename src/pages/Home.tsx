@@ -5,9 +5,10 @@ import axios from "axios";
 import Table from "../components/Table";
 import Tab from "../components/Tab";
 import { FaPlus, FaSearch } from "react-icons/fa";
+import MyModal from "../components/Modal";
 
 function Home() {
-  const people = [
+  const peoples = [
     {
       name: 'Leslie Alexander',
       email: 'leslie.alexander@example.com',
@@ -57,7 +58,21 @@ function Home() {
       dateOfJoining: '2023-01-23T13:23Z',
     },
   ]
+  let [isOpen, setIsOpen] = useState(false)
+  let [people,setPeople] = useState(peoples)
 
+  function closeModal() {
+    setIsOpen(true)
+  }
+
+  function handleChildEvent() {
+    setIsOpen(false)
+  }
+
+  function submitHandler(data:any){
+    setPeople(current => [...current, data]);
+  }
+  
   return (
     <div className="bg-[#19191A] h-[100vh] py-10">
       <div className="md:flex md:justify-between md:items-center md:align-middle  py-3 p-3 mb-10">
@@ -65,11 +80,11 @@ function Home() {
 
         <div className="flex items-center gap-4 mt-10 md:mt-0">
           <Tab />
-          <button className=" bg-[#1377FF] rounded-[50%] flex items-center justify-center text-white w-10 h-10"><FaPlus /></button>
+          <button className=" bg-[#1377FF] rounded-[50%] flex items-center justify-center text-white w-10 h-10" onClick={closeModal}><FaPlus /></button>
           <button className=" bg-[#424345] rounded-[50%] flex items-center justify-center text-white w-10 h-10"><FaSearch />
           </button>
         </div>
-
+        <MyModal isOpen={isOpen} onChildEvent={handleChildEvent} submitHandler={submitHandler}/>
       </div>
       {people.map((person, index) => (
         <Table key={person.email} person={person} />
