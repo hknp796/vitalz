@@ -1,69 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { FaBeer, FaHome, FaTeamspeak } from "react-icons/fa";
-import Button from "./button/Button";
+
+import { FaHome, FaUserPlus } from 'react-icons/fa'
 
 function Navbar() {
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="https://flowbite.com/" className="flex items-center">
-          <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            className="h-8 mr-3"
-            alt="Flowbite Logo"
-          />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Vitalz
-          </span>
-        </a>
-        <button
-          data-collapse-toggle="navbar-default"
-          type="button"
-          className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          aria-controls="navbar-default"
-          aria-expanded="false"
-        >
-          <span className="sr-only">Open main menu</span>
-          <svg
-            className="w-6 h-6"
-            aria-hidden="true"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        </button>
-        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-                aria-current="page"
-              >
-                <Button title={"Home"} icon={<FaHome />} />
-              </a>
-            </li>
+    <div>
+      <div className="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-[#1377FF]  rounded-[10px] bottom-4 left-1/2 ">
+        <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
+          <button type="button" className="inline-flex flex-col items-center text-black justify-center px-5 rounded-l-full hover:text-white">
+           <FaHome />
+            <span className="sr-only">Home</span>
+          </button>
 
-            <li>
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-              >
-                <Button title={"Community"} icon={<FaTeamspeak />} />
-              </a>
-            </li>
-          </ul>
+
+          <button type="button" className="inline-flex flex-col items-center justify-center px-5 rounded-r-full text-black hover:text-white">
+            <FaUserPlus/>
+          </button>
+
         </div>
       </div>
-    </nav>
-  );
+    </div>
+  )
 }
 
-export default Navbar;
+export default Navbar

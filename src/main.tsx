@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     element: <div>this is excercise page</div>,
   },
   {
-    path: "/login",
+    path: "/",
     element: <Login/>,
   },
 ]);

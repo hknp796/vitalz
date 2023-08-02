@@ -6,6 +6,7 @@ import Table from "../components/Table";
 import Tab from "../components/Tab";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import MyModal from "../components/Modal";
+import Navbar from "../components/Navbar";
 
 function Home() {
   const peoples = [
@@ -89,6 +90,7 @@ function Home() {
       {people.map((person, index) => (
         <Table key={person.email} person={person} />
       ))}
+      <Navbar />
     </div>
   );
 }
