@@ -75,8 +75,7 @@ function Home() {
     setPeople(current => [...current, data]);
   }
 
-  function details(d){
-    console.log({d});
+  function details(){
     
   }
 
