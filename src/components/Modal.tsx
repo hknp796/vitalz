@@ -57,22 +57,22 @@ export default function MyModal(props) {
                                         <h3>About</h3>
                                         <div className="mb-6 md:grid md:grid-cols-2   md:w-full md:gap-3 ml-6 pr-4">
                                             <div className=''>
-                                                <label for="email" className="block mb-2 text-sm font-medium ">Name</label>
-                                                <input type="text" id="email" className="  bg-[#121213] border border-gray-500  text-sm rounded-lg block p-5 focus:ring-blue-500 w-full " placeholder="name@flowbite.com" required />
+                                                <label htmlFor="naem" className="block mb-2 text-sm font-medium ">Name</label>
+                                                <input type="text" id="name" className="  bg-[#121213] border border-gray-500  text-sm rounded-lg block p-5 focus:ring-blue-500 w-full " placeholder="name@flowbite.com" required />
                                             </div>
                                             <div className=''>
 
-                                                <label for="password" className="block mb-2 text-sm font-medium ">User name</label>
-                                                <input type="text" id="password" className=" bg-[#121213] border border-gray-500  text-sm rounded-lg block p-5 focus:ring-blue-500  w-full" placeholder="name@flowbite.com" required />
+                                                <label htmlFor="username" className="block mb-2 text-sm font-medium ">User name</label>
+                                                <input type="text" id="username" className=" bg-[#121213] border border-gray-500  text-sm rounded-lg block p-5 focus:ring-blue-500  w-full" placeholder="name@flowbite.com" required />
                                             </div>
                                             <div className=''>
-                                                <label for="email" className="block mb-2 text-sm font-medium ">Phone Number</label>
-                                                <input type="tel" lid="email" className="  bg-[#121213] border border-gray-500  text-sm rounded-lg block p-5 focus:ring-blue-500 w-full " placeholder="name@flowbite.com" required />
+                                                <label htmlFor="phone" className="block mb-2 text-sm font-medium ">Phone Number</label>
+                                                <input type="tel" id="phone" className="  bg-[#121213] border border-gray-500  text-sm rounded-lg block p-5 focus:ring-blue-500 w-full " placeholder="name@flowbite.com" required />
                                             </div>
                                             <div className=''>
 
-                                                <label for="password" className="block mb-2 text-sm font-medium ">Email</label>
-                                                <input type="email" id="password" className=" bg-[#121213] border border-gray-500  text-sm rounded-lg block p-5 focus:ring-blue-500  w-full" placeholder="name@flowbite.com" required />
+                                                <label htmlFor="password" className="block mb-2 text-sm font-medium ">Email</label>
+                                                <input type="email" id="email" className=" bg-[#121213] border border-gray-500  text-sm rounded-lg block p-5 focus:ring-blue-500  w-full" placeholder="name@flowbite.com" required />
                                             </div>
                                         </div>
                                         <div className='grid grid-cols-2 grid-rows-2'>
@@ -84,11 +84,11 @@ export default function MyModal(props) {
 
                                                     <div className="flex items-center mr-4">
                                                         <input id="inline-radio" type="radio" value="" name="inline-radio-group" className="w-4 h-4 text-blue-600 bg-gray-100 " />
-                                                        <label for="inline-radio" className="ml-2 text-sm font-medium  ">Member</label>
+                                                        <label htmlFor="inline-radio" className="ml-2 text-sm font-medium  ">Member</label>
                                                     </div>
                                                     <div className="flex items-center mr-4">
                                                         <input id="inline-2-radio" type="radio" value="" name="inline-radio-group" className="w-4 h-4 text-blue-600 bg-gray-100 " />
-                                                        <label for="inline-2-radio" className="ml-2 text-sm font-medium  ">Staff</label>
+                                                        <label htmlFor="inline-2-radio" className="ml-2 text-sm font-medium  ">Staff</label>
                                                     </div>
                                                 </div>
 
@@ -100,11 +100,11 @@ export default function MyModal(props) {
 
                                                     <div className="flex items-center mr-4">
                                                         <input id="inline-radio" type="radio" value="" name="inline-radio-group" className="w-4 h-4 text-blue-600 bg-gray-100 " />
-                                                        <label for="inline-radio" className="ml-2 text-sm font-medium  ">Male</label>
+                                                        <label htmlFor="inline-radio" className="ml-2 text-sm font-medium  ">Male</label>
                                                     </div>
                                                     <div className="flex items-center mr-4">
                                                         <input id="inline-2-radio" type="radio" value="" name="inline-radio-group" className="w-4 h-4 text-blue-600 bg-gray-100 " />
-                                                        <label for="inline-2-radio" className="ml-2 text-sm font-medium  ">Female</label>
+                                                        <label htmlFor="inline-2-radio" className="ml-2 text-sm font-medium  ">Female</label>
                                                     </div>
 
                                                 </div>
