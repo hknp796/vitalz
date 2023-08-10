@@ -75,6 +75,11 @@ function Home() {
     setPeople(current => [...current, data]);
   }
 
+  function details(d){
+    console.log({d});
+    
+  }
+
   return (
     <div className="bg-[#19191A] h-[100vh] px-10">
       <div className="md:flex md:justify-between md:items-center md:align-middle  py-3 p-3 mb-10">
@@ -96,7 +101,7 @@ function Home() {
             </div>
           </div>
           {people.map((person, index) => (
-            <Table key={person.email} person={person} />
+            <Table key={person.email} person={person}  details={details}/>
           ))}
         </div>
       </div>
