@@ -5,7 +5,7 @@ import { Card, Dropdown, } from 'flowbite-react';
 
 export default function UserProfileCard() {
   return (
-    <Card>
+    <Card className='w-[20%] '>
       <div className="flex justify-end px-4 pt-4 text-black">
         <Dropdown
           inline
@@ -43,7 +43,7 @@ export default function UserProfileCard() {
           </div>
         </Dropdown>
       </div>
-      <div className="flex flex-col divs-center pb-10">
+      <div className="flex flex-col items-center d pb-10">
         <img 
           alt="Bonnie image"
           className="mb-3 rounded-full shadow-lg"
@@ -59,19 +59,19 @@ export default function UserProfileCard() {
         </span>
         <div className="mt-4 flex space-x-3 lg:mt-6">
           <a
-            className="inline-flex divs-center rounded-lg bg-cyan-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-cyan-800 focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
+            className="inline-flex d rounded-lg bg-cyan-700 px-4 py-2 text-center text-sm font-medium text-white "
             href="#"
           >
             <p>
-              Add friend
+              Email
             </p>
           </a>
           <a
-            className="inline-flex divs-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+            className="inline-flex d rounded-lg border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 "
             href="#"
           >
             <p>
-              Message
+              Text
             </p>
           </a>
         </div>
