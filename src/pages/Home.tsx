@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import Image from "../assets/workout.jpeg";
-import { getBodyparts } from "../api/rapidapi";
+import { useEffect, useState } from "react";
+import { Spinner } from 'flowbite-react';
+
 import axios from "axios";
 import Table from "../components/Table";
 import Tab from "../components/Tab";
@@ -12,6 +12,7 @@ import SideCard from "../components/SideCard";
 function Home() {
 
   let [isOpen, setIsOpen] = useState(false)
+  let [isLoading, setLoading] = useState(false)
 
   function closeModal() {
     setIsOpen(true)
@@ -21,24 +22,27 @@ function Home() {
     setIsOpen(false)
   }
 
-  function details(){
-    
+  function details() {
+
   }
   const [userData, setData] = useState([]);
   useEffect(() => {
+    setLoading(true)
     axios.get('https://dummyjson.com/users')
       .then(response => {
         setData(response.data.users);
       })
       .catch(error => {
         console.error('Error:', error);
-      });
-  }, []); 
+      }).finally(() => {
+        setLoading(false)
+      })
+  }, []);
 
   return (
     <div className="bg-[#19191A] h-[100vh] px-10">
       <div className="md:flex md:justify-between md:items-center md:align-middle  py-3 p-3 mb-10">
-        <MyModal isOpen={isOpen} onChildEvent={handleChildEvent} submitHandler={submitHandler} />
+        <MyModal isOpen={isOpen} onChildEvent={handleChildEvent} />
       </div>
       <div className="flex flex-wrap md:flex md:flex-nowrap md:gap-10">
         <div className="w-[30%]">
@@ -55,9 +59,19 @@ function Home() {
               </button>
             </div>
           </div>
-          {userData.map((person, index) => (
-            <Table key={person.id} person={person}  details={details}/>
-          ))}
+          {
+            isLoading ? (<div className="flex justify-center align-middle items-center">
+              <Spinner
+                aria-label="Info spinner example"
+                color="info"
+                size="xl"
+              />
+            </div>
+            ) :
+              userData.map((person, index) => (
+                <Table key={person.id} person={person} details={details} />
+              ))
+          }
         </div>
       </div>
       <Navbar />
