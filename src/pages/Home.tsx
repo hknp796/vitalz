@@ -25,19 +25,26 @@ function Home() {
   function details() {
 
   }
-  const [userData, setData] = useState([]);
+
+  let [userData, setUserData] = useState<any[]>([]);
   useEffect(() => {
     setLoading(true)
     axios.get('https://dummyjson.com/users')
       .then(response => {
-        setData(response.data.users);
+        setUserData(response.data.users);
       })
       .catch(error => {
         console.error('Error:', error);
       }).finally(() => {
         setLoading(false)
       })
+
   }, []);
+  const handleDeleteUser = (person) => {    
+    setUserData((prevUserData) => {
+      return prevUserData.filter((item) => item.id !== person.id);
+    });
+  }
 
   return (
     <div className="bg-[#19191A] h-[100vh] px-10">
@@ -69,7 +76,7 @@ function Home() {
             </div>
             ) :
               userData.map((person, index) => (
-                <Table key={person.id} person={person} details={details} />
+                <Table key={person.id} person={person} details={details} onDeleteUser={handleDeleteUser} />
               ))
           }
         </div>
