@@ -42,6 +42,7 @@ function Home() {
     setLoading(true)
     axios.get('https://dummyjson.com/users')
       .then(response => {
+        response.data.users.length = 6
         setUserData(response.data.users);
       })
       .catch(error => {
@@ -55,6 +56,7 @@ function Home() {
     setLoading(true)
     axios.get('https://dummyjson.com/users')
       .then(response => {
+        response.data.users.length = 8
         setUserData(response.data.users);
       })
       .catch(error => {
