@@ -22,7 +22,7 @@ export default function MyModal(props:any) {
     return (
         <>
             <Transition appear show={props.isOpen} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                <Dialog as="div" className="relative z-10 w-[30%]" onClose={closeModal}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -46,7 +46,7 @@ export default function MyModal(props:any) {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="md:w-[80%] w-full transform  rounded-2xl bg-[#242526] p-6 text-left align-middle shadow-xl transition-all">
+                                <Dialog.Panel className="md:w-[40%] w-full transform  rounded-2xl bg-[#242526] p-6 text-left align-middle shadow-xl transition-all">
                                     <Dialog.Title
                                         as="h3"
                                         className="text-lg font-medium leading-6 "
@@ -55,7 +55,7 @@ export default function MyModal(props:any) {
                                     </Dialog.Title>
                                     <div className='mt-10'>
                                         <h3>About</h3>
-                                        <div className="mb-6 md:grid md:grid-cols-2   md:w-full md:gap-3 ml-6 pr-4">
+                                        <div className="mb-6  md:gap-3 ml-4 pr-4">
                                             <div className=''>
                                                 <label htmlFor="naem" className="block mb-2 text-sm font-medium ">Name</label>
                                                 <input type="text" id="name" className="  bg-[#121213] border border-gray-500  text-sm rounded-lg block p-5 focus:ring-blue-500 w-full " placeholder="name@flowbite.com" required />

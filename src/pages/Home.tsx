@@ -6,7 +6,6 @@ import Table from "../components/Table";
 import Tab from "../components/Tab";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import MyModal from "../components/Modal";
-import Navbar from "../components/Navbar";
 import SideCard from "../components/SideCard";
 
 function Home() {
@@ -74,7 +73,7 @@ function Home() {
 
   return (
     <div className="bg-[#19191A] h-[100vh] px-10">
-      <div className="md:flex md:justify-between md:items-center md:align-middle  py-3 p-3 mb-10">
+      <div className=" md:align-middle  py-3 p-3 mb-10">
         <MyModal isOpen={isOpen} onChildEvent={handleChildEvent} />
       </div>
       <div className="flex flex-wrap md:flex md:flex-nowrap md:gap-10">
@@ -107,7 +106,6 @@ function Home() {
           }
         </div>
       </div>
-      <Navbar />
     </div>
   );
 }
