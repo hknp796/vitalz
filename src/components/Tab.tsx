@@ -5,14 +5,19 @@ function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function Example({getClients,getManagementData}) {
 
-
+const getClient =()=>{
+  getClients()
+}
+const getManagement = ()=>{
+  getManagementData()
+}
   return (
     <div className="w-[250px] max-w-md">
       <Tab.Group>
         <Tab.List className="flex space-x-1 rounded-xl bg-[#424345] p-1">
-          <Tab className={({ selected }) =>
+          <Tab onClick={getClient} className={({ selected }) =>
             classNames(
               'w-full rounded-lg py-2 text-sm font-medium leading-5 text-white',
               selected
@@ -23,7 +28,7 @@ export default function Example() {
           >
             Clients
           </Tab>
-          <Tab className={({ selected }) =>
+          <Tab onClick={getManagement} className={({ selected }) =>
             classNames(
               'w-full rounded-lg py-2 text-sm font-medium leading-5 ',
               selected

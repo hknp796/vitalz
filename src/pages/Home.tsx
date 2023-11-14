@@ -28,6 +28,17 @@ function Home() {
 
   let [userData, setUserData] = useState<any[]>([]);
   useEffect(() => {
+    getClient()
+
+  }, []);
+
+  const handleDeleteUser = (person) => {
+    setUserData((prevUserData) => {
+      return prevUserData.filter((item) => item.id !== person.id);
+    });
+  }
+
+  const getClient = () => {
     setLoading(true)
     axios.get('https://dummyjson.com/users')
       .then(response => {
@@ -39,12 +50,25 @@ function Home() {
         setLoading(false)
       })
 
-  }, []);
-  const handleDeleteUser = (person) => {    
-    setUserData((prevUserData) => {
-      return prevUserData.filter((item) => item.id !== person.id);
-    });
   }
+  const getManagementData = () => {
+    setLoading(true)
+    axios.get('https://dummyjson.com/users')
+      .then(response => {
+        setUserData(response.data.users);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      }).finally(() => {
+        setLoading(false)
+      })
+
+  }
+
+  const getManagement = () => {
+    getManagementData()
+  }
+
 
   return (
     <div className="bg-[#19191A] h-[100vh] px-10">
@@ -60,7 +84,7 @@ function Home() {
             <h3 className="text-white  font-bold"> People</h3>
             <div className="flex gap-4 ">
 
-              <Tab />
+              <Tab getClients={getClient} getManagementData={getManagement} />
               <button className=" bg-[#1377FF] rounded-[50%] flex items-center justify-center text-white w-10 h-10" onClick={closeModal}><FaPlus /></button>
               <button className=" bg-[#424345] rounded-[50%] flex items-center justify-center text-white w-10 h-10"><FaSearch />
               </button>
