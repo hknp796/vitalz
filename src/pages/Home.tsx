@@ -7,6 +7,7 @@ import Tab from "../components/Tab";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import MyModal from "../components/Modal";
 import SideCard from "../components/SideCard";
+import SideNavbar from "../components/SideNavbar";
 
 function Home() {
 
@@ -72,13 +73,13 @@ function Home() {
 
 
   return (
-    <div className="bg-[#19191A] h-[100vh] px-10">
-      <div className=" md:align-middle  py-3 p-3 mb-10">
+    <div className="h-[100vh]">
+      {/* <div className=" md:align-middle  py-3 p-3 mb-10">
         <MyModal isOpen={isOpen} onChildEvent={handleChildEvent} />
-      </div>
+      </div> */}
       <div className="flex flex-wrap md:flex md:flex-nowrap md:gap-10">
-        <div className="w-[30%]">
-          <SideCard />
+        <div>
+          <SideNavbar />
         </div>
         <div className="w-[100%]">
           <div className="flex items-center flex-wrap md:flex md:items-center justify-between gap-4 mt-10 md:mt-0 p-3">
