@@ -1,12 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import {createRoot} from "react-dom/client";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter as Router,createBrowserRouter} from "react-router-dom";
 
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import ClientDetails from "./pages/ClientDetails";
-
+import Billing from "./pages/Billing";
+import App from './App'
 const router = createBrowserRouter([
   {
     path: "/home",
@@ -21,11 +22,19 @@ const router = createBrowserRouter([
     element: <Login/>,
   },
   {
-    path: "/:id",
+    path: "/home",
     element: <ClientDetails/>,
   },
+  {
+    path: "/billing",
+    element: <Billing/>,
+  },
 ]);
+const root = createRoot(document.getElementById('root'));
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-    <RouterProvider router={router} />
+root.render(
+  <Router>
+    <App />
+  </Router>
 );
+

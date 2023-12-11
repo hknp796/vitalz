@@ -2,9 +2,9 @@ import { Sidebar } from 'flowbite-react';
 import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards,HiUsers ,HiCash} from 'react-icons/hi';
 
 const sidebarItems = [
-  { href: '#', icon: HiChartPie, text: 'Dashboard' },
+  { href: '/home', icon: HiChartPie, text: 'Dashboard' },
   { href: '#', icon: HiUsers, text: 'Members' },
-  { href: '#', icon: HiCash, text: 'Billing' },
+  { href: '/billing', icon: HiCash, text: 'Billing' },
 ];
 
 export default function CTAButton() {

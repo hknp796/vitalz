@@ -1,13 +1,13 @@
 import React from "react";
-import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
+import SideNavbar from "./components/SideNavbar";
 import "./fonts.css";
+import ClientDetails from "./pages/ClientDetails";
 
 function App() {
   return (
-    <div style={{ backgroundColor: "red" }}>
-      <Navbar />
-      <Home />
+    <div>
+      <SideNavbar />
     </div>
   );
 }
