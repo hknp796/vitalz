@@ -20,8 +20,8 @@ console.log(props);
   
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full">
+    <div className="">
+      <table className="">
         <thead>
           <tr className="bg-gray-200 text-gray-700">
             {props.headers.map((header, index) => (

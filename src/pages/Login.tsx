@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 function Login() {
     const navigate = useNavigate()
     const handleSubmit =()=>{
-        navigate('/home')
+        navigate('/dashboard')
     }
     return (
         <div className='bg-[#19191A] h-[98vh] m-2 md:flex justify-center items-center '>
