@@ -2,7 +2,11 @@ import React from 'react'
 
 function Billing() {
   return (
-    <div>Billing</div>
+    <div>
+
+    <h3 className='ml-20 font-semibold text-3xl'>Billing</h3>
+
+    </div>
   )
 }
 

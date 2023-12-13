@@ -1,25 +1,38 @@
 
-import { FaHome, FaUserPlus } from 'react-icons/fa'
+import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 
-function Navbar() {
+export default function Component() {
   return (
-    <div>
-      <div className="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-[#1377FF]  rounded-[10px] bottom-4 left-1/2 ">
-        <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
-          <button type="button" className="inline-flex flex-col items-center text-black justify-center px-5 rounded-l-full hover:text-white">
-           <FaHome />
-            <span className="sr-only">Home</span>
-          </button>
-
-
-          <button type="button" className="inline-flex flex-col items-center justify-center px-5 rounded-r-full text-black hover:text-white">
-            <FaUserPlus/>
-          </button>
-
-        </div>
+    <Navbar fluid rounded>
+      <div className="flex md:order-2">
+        <Dropdown
+          arrowIcon={false}
+          inline
+          label={
+            <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
+          }
+        >
+          <Dropdown.Header>
+            <span className="block text-sm">Bonnie Green</span>
+            <span className="block truncate text-sm font-medium">name@flowbite.com</span>
+          </Dropdown.Header>
+          <Dropdown.Item>Dashboard</Dropdown.Item>
+          <Dropdown.Item>Settings</Dropdown.Item>
+          <Dropdown.Item>Earnings</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item>Sign out</Dropdown.Item>
+        </Dropdown>
+        <Navbar.Toggle />
       </div>
-    </div>
-  )
+      <Navbar.Collapse>
+        <Navbar.Link href="#" active>
+          Home
+        </Navbar.Link>
+        <Navbar.Link href="#">About</Navbar.Link>
+        <Navbar.Link href="#">Services</Navbar.Link>
+        <Navbar.Link href="#">Pricing</Navbar.Link>
+        <Navbar.Link href="#">Contact</Navbar.Link>
+      </Navbar.Collapse>
+    </Navbar>
+  );
 }
-
-export default Navbar
