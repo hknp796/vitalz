@@ -21,7 +21,8 @@ console.log(props);
 
   return (
     <div className="">
-      <table className="">
+      
+      <table className="w-full">
         <thead>
           <tr className="bg-gray-200 text-gray-700">
             {props.headers.map((header, index) => (
