@@ -10,7 +10,7 @@ import Inventories from "./pages/Inventories";
 import App from './App'
 const router = createBrowserRouter([
   {
-    path: "/dashboard",
+    path: "/",
     element: <Home/>,
   },
   {

@@ -1,6 +1,6 @@
 import React from "react";
 import { FaBeer } from "react-icons/fa";
-function Button(props:any) {
+function Button(props) {
   return (
     <div>
       <button

@@ -11,7 +11,7 @@ function App() {
     <div className="flex">
       <SideNavbar />
       <Routes className=''>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/members" element={<ClientDetails />} />
         <Route path="/billing" element={<Billing />} />
         <Route path="/inventories" element={<Inventories />} />

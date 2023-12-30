@@ -3,7 +3,7 @@ import { HiChartPie,HiUsers ,HiCash,} from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 
 const sidebarItems = [
-  { link: '/dashboard', icon: HiChartPie, text: 'Dashboard' },
+  { link: '/', icon: HiChartPie, text: 'Dashboard' },
   { link: '/members', icon: HiUsers, text: 'Members' },
   { link: '/billing', icon: HiCash, text: 'Billing' },
   { link: '/inventories', icon: HiCash, text: 'Inventory' },
