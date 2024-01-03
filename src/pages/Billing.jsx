@@ -1,20 +1,24 @@
 import React from 'react'
-import { FaArrowRight, FaCaretRight, FaTrash,FaEdit,FaPenSquare,FaRegTrashAlt } from "react-icons/fa";
+import { FaArrowRight, FaCaretRight, FaTrash, FaEdit, FaPenSquare, FaRegTrashAlt } from "react-icons/fa";
 import Chart from '../components/barchart'
+import Doughnut from '../components/Doughnut';
 
 function Billing() {
   const clients = [
-    { id: 1, name: 'John Doe', amount: 30, description:'', status: 'Active' },
-    { id: 2, name: 'Jane Smith', amount: 25,description:'', status: 'Inactive' },
-]
+    { id: 1, name: 'John Doe', amount: 30, description: '', status: 'Active' },
+    { id: 2, name: 'Jane Smith', amount: 25, description: '', status: 'Inactive' },
+  ]
 
-const tableHeaders = ['Sl. No', 'Member', 'Amount', 'Description', 'Status', ''];
+  const tableHeaders = ['Sl. No', 'Member', 'Amount', 'Description', 'Status', ''];
 
   return (
-    <div className='w-full'>
-      <h3 className='ml-20 font-semibold text-3xl'>Billing</h3>
-      <Chart />
+    <div className='w-full pt-3'>
+      <h3 className='ml-4 mb-10 font-semibold text-3xl'>Billing</h3>
+      <div className='flex'>
 
+        <Doughnut />
+        <Chart />
+      </div>
       <table className="w-[100%]">
         <thead>
           <tr className="bg-gray-200 text-gray-700">
@@ -44,7 +48,7 @@ const tableHeaders = ['Sl. No', 'Member', 'Amount', 'Description', 'Status', '']
               <td className="py-3 px-4">{client.status}</td>
               <td className="py-3 px-4">
                 <button className="mr-2">
-                download
+                  download
                 </button>
               </td>
             </tr>

@@ -8,8 +8,9 @@ import {
     Title,
     Tooltip,
     Legend,
+    ArcElement
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Line,Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(
     CategoryScale,
@@ -19,9 +20,10 @@ ChartJS.register(
     Tooltip,
     Legend,
     LineElement,
+    ArcElement
 );
 
-export const options = {
+ const options = {
     responsive: true,
     scales: {
         x: {
