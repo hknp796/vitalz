@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import ClientDetails from "./pages/Members";
 import Billing from "./pages/Billing";
 import Inventories from "./pages/Inventories";
+import AddNewMember from "./pages/AddNewMember";
 import App from './App'
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/inventories",
     element: <Inventories/>,
+  },
+  {
+    path: "/add-members",
+    element: <AddNewMember/>,
   },
 ]);
 const root = createRoot(document.getElementById('root'));
