@@ -48,7 +48,7 @@ function ClientDetails() {
         <Button className="mb-2" onClick={() => setOpenModal(true)}>Add New</Button>
       </div>
       <DataTable clients={clients} headers={tableHeaders} />
-      <Modal show={openModal} onClose={() => setOpenModal(false)} className='overflow-visible'>
+      <Modal dismissible show={openModal} onClose={() => setOpenModal(false)} className='overflow-visible'>
         <Modal.Body className='overflow-visible'>
           <form className="flex flex-col gap-4">
             <div>
@@ -71,7 +71,7 @@ function ClientDetails() {
               </div>
               <Select id="countries" required
                 onChange={handleInputChange} name='gender'>
-                <option value="" selected>Choose one</option>
+                <option value="" >Choose one</option>
                 <option value='male'>Male</option>
                 <option value='female'>Female</option>
               </Select>
