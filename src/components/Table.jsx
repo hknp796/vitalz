@@ -16,9 +16,6 @@ export default function DataTable(props) {
     e.stopPropagation()
   }
 
-console.log(props);
-  
-
   return (
     <div className="">
       
