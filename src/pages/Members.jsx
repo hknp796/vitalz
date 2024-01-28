@@ -31,13 +31,13 @@ function ClientDetails() {
   const handleJoiningDate = (date) => {
     setJoiningDate(date)
   };
-   
-  const handlingBirthDate = (date) =>{
+
+  const handlingBirthDate = (date) => {
     setBirthDate(date)
   }
   const submitForm = () => {
-    let form = {...inputValues,dateOfBirth,dateOfJoining}
-    console.log(form,'frm');
+    let form = { ...inputValues, dateOfBirth, dateOfJoining }
+    console.log(form, 'frm');
 
   }
   const tableHeaders = ['Sl. No', 'Name', 'Age', 'Contact', 'Date of Joining', 'Billing Status', ''];
@@ -64,6 +64,20 @@ function ClientDetails() {
               </div>
               <TextInput id="lname" type="text" required
                 onChange={handleInputChange} name='lastName' />
+            </div>
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="age" value="Age" />
+              </div>
+              <TextInput id="age" type="text" required
+                onChange={handleInputChange} name='age' />
+            </div>
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="contact" value="Contact" />
+              </div>
+              <TextInput id="contact" type="text" required
+                onChange={handleInputChange} name='contact' />
             </div>
             <div>
               <div className="mb-2 block">
@@ -94,6 +108,8 @@ function ClientDetails() {
           </form>
         </Modal.Body>
       </Modal>
+
+    
 
     </div>
   )

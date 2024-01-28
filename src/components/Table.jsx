@@ -1,14 +1,19 @@
-import { FaArrowRight, FaCaretRight, FaTrash,FaEdit,FaPenSquare,FaRegTrashAlt } from "react-icons/fa";
+import { FaPenSquare, FaRegTrashAlt, FaRupeeSign } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import { Table } from 'flowbite-react';
+import { Button, Modal, Label, TextInput, Select } from 'flowbite-react';
 import { useState } from "react";
 
 export default function DataTable(props) {
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const [openPaymentModal, setOpenPaymentModal] = useState(false);
+  const [inputValues, setInputValues] = useState({
+    month: '',
+    amount: '',
+  });
   const navigate = useNavigate()
   function selectClient() {
     props.details(props.person.name)
     navigate(`/${props.person.name}`)
-
   }
 
   const deleteUser = (e, user) => {
@@ -16,9 +21,25 @@ export default function DataTable(props) {
     e.stopPropagation()
   }
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
+  };
+
+  const submitForm = () => {
+    console.log(inputValues);
+  }
+
+  const setPayment = (id) => {
+    console.log({id});
+    setOpenPaymentModal(true)
+    // api calls
+  }
   return (
     <div className="">
-      
       <table className="w-full">
         <thead>
           <tr className="bg-gray-200 text-gray-700">
@@ -48,17 +69,47 @@ export default function DataTable(props) {
               <td className="py-3 px-4">{client.dateOfJoining}</td>
               <td className="py-3 px-4">{client.billingStatus}</td>
               <td className="py-3 px-4">
+                <button className="mr-2" onClick={() => setPayment(client.id)}>
+                  <FaRupeeSign size={20} />
+                </button>
                 <button className="mr-2">
-                <FaPenSquare size={20}/>
+                  <FaPenSquare size={20} />
                 </button>
                 <button className="">
-                <FaRegTrashAlt size={20}/>
+                  <FaRegTrashAlt size={20} />
                 </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <Modal dismissible show={openPaymentModal} onClose={() => setOpenPaymentModal(false)} className='overflow-visible'>
+        <Modal.Header>Add Payment</Modal.Header>
+        <Modal.Body className='overflow-visible'>
+
+          <div>
+            <div className=" block">
+              <Label htmlFor="months" value="Month" />
+            </div>
+            <Select id="month" required
+              onChange={handleInputChange} name='month'>
+              {months.map((month) => (
+                <option key={month} value={month}>{month}</option>
+              ))}
+            </Select>
+          </div>
+          <div>
+            <div className="block">
+              <Label htmlFor="amount" value="Add Amount" />
+            </div>
+            <TextInput id="amount" type="number" required
+              onChange={handleInputChange} name='amount' />
+          </div>
+          <div className="flex justify-end mt-3">
+            <Button onClick={submitForm} > Add Payment</Button>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }
