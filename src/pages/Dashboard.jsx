@@ -26,7 +26,7 @@ function Dashboard() {
     const tabs = [
         {
             title: 'Trainers',
-            content: <DataTable clients={clients} headers={tableHeaders} />
+            content: <DataTable clients={clients} headers={tableHeaders} isDashboard/>
             ,
         },
         {
@@ -37,12 +37,11 @@ function Dashboard() {
     ];
 
     return (
-        <div className='p-10'>
+        <div className='p-10 w-full'>
 
             <div className='flex items-start gap-4'>
-                <Chart data={data} />
-                <Chart data={data} />
-                <Chart data={data} />
+                <Chart data={data} title='Current Members'/>
+                <Chart data={data} title='New Members'/>
             </div>
             <div>
 

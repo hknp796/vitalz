@@ -51,10 +51,10 @@ ChartJS.register(
 
 
 
-function Dashboard({data}) {
+function Dashboard({data,title}) {
     return (
         <div className='bg-white shadow-md p-4 rounded-xl border border-red-50'>
-            <h3 className='text-gray-500 text-center'>Current Members</h3>
+            <h3 className='text-gray-500 text-center'>{title}</h3>
             <div className='flex items-center gap-3 justify-center'>
                 <div className='text-[#3C79ED]'>
                     <span className='font-bold text-xl '>333</span>

@@ -4,6 +4,7 @@ import { Button, Modal, Label, TextInput, Select } from 'flowbite-react';
 import { useState } from "react";
 
 export default function DataTable(props) {
+  console.log(props);
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const [openPaymentModal, setOpenPaymentModal] = useState(false);
   const [inputValues, setInputValues] = useState({
@@ -34,7 +35,6 @@ export default function DataTable(props) {
   }
 
   const setPayment = (id) => {
-    console.log({id});
     setOpenPaymentModal(true)
     // api calls
   }
@@ -69,9 +69,11 @@ export default function DataTable(props) {
               <td className="py-3 px-4">{client.dateOfJoining}</td>
               <td className="py-3 px-4">{client.billingStatus}</td>
               <td className="py-3 px-4">
-                <button className="mr-2" onClick={() => setPayment(client.id)}>
-                  <FaRupeeSign size={20} />
-                </button>
+                {!props.isDashboard &&
+                  <button className="mr-2" onClick={() => setPayment(client.id)}>
+                    <FaRupeeSign size={20} />
+                  </button>
+                }
                 <button className="mr-2">
                   <FaPenSquare size={20} />
                 </button>

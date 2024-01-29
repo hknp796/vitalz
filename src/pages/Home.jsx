@@ -70,13 +70,13 @@ function Home() {
   const getManagement = () => {
     getManagementData()
   }
-  const clients  = [
+  const clients = [
     { id: 1, name: 'John Doe', age: 30, contact: '123-456-7890', dateOfJoining: '12-21-211', billingStatus: 'Active' },
     { id: 2, name: 'Jane Smith', age: 25, contact: '987-654-3210', dateOfJoining: '12-21-211', billingStatus: 'Inactive' },
   ]
 
   const tableHeaders = ['Sl. No', 'Name', 'Age', 'Contact', 'Date of Joining', 'Billing Status', ''];
-
+  const home = false
   return (
     <div className="h-[100vh]">
       {/* <div className=" md:align-middle  py-3 p-3 mb-10">
@@ -106,7 +106,7 @@ function Home() {
               />
             </div>
             ) :
-                <Table  clients={clients} headers={tableHeaders}/>
+              <Table clients={clients} headers={tableHeaders} home={true} />
           }
         </div>
       </div>
