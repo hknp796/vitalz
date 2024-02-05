@@ -21,17 +21,22 @@ function Dashboard() {
         { id: 1, name: 'John Doe', age: 30, contact: '123-456-7890', dateOfJoining: '12-21-211', billingStatus: 'Active' },
         { id: 2, name: 'Jane Smith', age: 25, contact: '987-654-3210', dateOfJoining: '12-21-211', billingStatus: 'Inactive' },
     ]
+    const mangement =[
+        { id: 1, name: 'John Doe', age: 30, contact: '123-456-7890', dateOfJoining: '12-21-211',  },
+        { id: 2, name: 'Jane Smith', age: 25, contact: '987-654-3210', dateOfJoining: '12-21-211',  },
+    ]
 
     const tableHeaders = ['Sl. No', 'Name', 'Age', 'Contact', 'Date of Joining', 'Billing Status', ''];
+    const employeeTableHeaders = ['Sl. No', 'Name', 'Age', 'Contact', 'Date of Joining',''];
     const tabs = [
         {
-            title: 'Trainers',
+            title: 'Clients',
             content: <DataTable clients={clients} headers={tableHeaders} isDashboard/>
             ,
         },
         {
-            title: 'Clients',
-            content: <div>Content for Tab 2</div>,
+            title: 'Trainers',
+            content: <DataTable clients={mangement} headers={employeeTableHeaders} isDashboard/>
         },
         // Add more tabs as needed
     ];
