@@ -1,9 +1,25 @@
 
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAxios from '../hooks/useAxios';
 function Login() {
     const navigate = useNavigate()
-    const handleSubmit =()=>{
-        navigate('/dashboard')
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        useAxios({
+            method: 'post',
+            url: `${import.meta.env.VITE_REACT_APP_API_BASE_URL}/login`,
+            body:{
+                email:'af',
+                password:'hello'
+            },
+            successCallBack: ({ message }) => {
+                console.log({message});
+                useSaveToken(null)
+                // toast.success(message)
+            }
+        })
     }
     return (
         <div className='bg-[#19191A] h-[98vh] m-2 md:flex justify-center items-center '>
@@ -25,8 +41,6 @@ function Login() {
                     </div>
                 </form>
             </div>
-
-
         </div>
     )
 }

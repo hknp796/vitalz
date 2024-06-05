@@ -108,9 +108,6 @@ function ClientDetails() {
           </form>
         </Modal.Body>
       </Modal>
-
-    
-
     </div>
   )
 }
