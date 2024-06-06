@@ -6,6 +6,8 @@ function Login() {
     const navigate = useNavigate()
 
     const handleSubmit = (e) => {
+        navigate("/");
+        return
         e.preventDefault()
         useAxios({
             method: 'post',

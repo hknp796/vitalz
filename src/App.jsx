@@ -16,7 +16,7 @@ function App() {
 
       { !isLoginPage && <SideNavbar /> }
       <Routes className=''>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/members" element={<ClientDetails />} />
         <Route path="/billing" element={<Billing />} />
