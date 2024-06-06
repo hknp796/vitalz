@@ -4,7 +4,7 @@ import { Button, Modal, Label, TextInput, Select } from 'flowbite-react';
 import { useState } from "react";
 
 export default function DataTable(props) {
-  console.log(props);
+  // console.log(props);
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const [openPaymentModal, setOpenPaymentModal] = useState(false);
   const [inputValues, setInputValues] = useState({
