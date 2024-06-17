@@ -1,20 +1,21 @@
-import { Tabs } from "flowbite-react";
 import React from "react";
-import useAxios from '../hooks/useAxios';
-import { useEffect } from "react";
+import useAxios from "../hooks/useAxios";
+import { useEffect, useState } from "react";
 import Chart from "../components/Chart";
 import DataTable from "../components/Table";
 import CustomTabs from "../components/Tabs";
+import { toast } from 'react-toastify';
+
+
 function Dashboard() {
+const [members, setMembers] = useState([]);
+
   const getClient = () => {
-    // setLoading(true)
     useAxios({
       method: "get",
-      url: `${import.meta.env.VITE_REACT_APP_API_BASE_URL}/members`,
+      url: `/members`,
       successCallBack: ({ data }) => {
-        console.log({ data });
-        // useSaveToken(null);
-        // toast.success(message)
+        setMembers(data);
       },
     });
   };
@@ -22,6 +23,17 @@ function Dashboard() {
   useEffect(() => {
     getClient();
   }, []);
+
+  const onDeleteUser = (id) =>{
+    useAxios({
+      method: "post",
+      url: `/members/delete/${id}`,
+      successCallBack: ({ message }) => {
+        toast.success(message);
+        getClient()
+      },
+    });
+  }
 
   const labels = [
     "January",
@@ -100,7 +112,7 @@ function Dashboard() {
     {
       title: "Clients",
       content: (
-        <DataTable clients={clients} headers={tableHeaders} isDashboard />
+        <DataTable clients={members} headers={tableHeaders} onDeleteUser={onDeleteUser} isDashboard />
       ),
     },
     {

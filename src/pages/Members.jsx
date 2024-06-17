@@ -56,7 +56,7 @@ function ClientDetails() {
 
     useAxios({
       method: "post",
-      url: `${import.meta.env.VITE_REACT_APP_API_BASE_URL}/members`,
+      url: `/members`,
       body: form,
       successCallBack: ({ message }) => {
         console.log({ message });
