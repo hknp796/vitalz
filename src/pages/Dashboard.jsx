@@ -24,16 +24,7 @@ const [members, setMembers] = useState([]);
     getClient();
   }, []);
 
-  const onDeleteUser = (id) =>{
-    useAxios({
-      method: "post",
-      url: `/members/delete/${id}`,
-      successCallBack: ({ message }) => {
-        toast.success(message);
-        getClient()
-      },
-    });
-  }
+
 
   const labels = [
     "January",
@@ -112,7 +103,7 @@ const [members, setMembers] = useState([]);
     {
       title: "Clients",
       content: (
-        <DataTable clients={members} headers={tableHeaders} onDeleteUser={onDeleteUser} isDashboard />
+        <DataTable clients={members} headers={tableHeaders} getClient={getClient} isDashboard />
       ),
     },
     {
@@ -121,7 +112,6 @@ const [members, setMembers] = useState([]);
         <DataTable
           clients={mangement}
           headers={employeeTableHeaders}
-          isDashboard
         />
       ),
     },

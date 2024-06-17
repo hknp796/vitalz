@@ -2,6 +2,9 @@ import { FaPenSquare, FaRegTrashAlt, FaRupeeSign } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, Label, TextInput, Select } from "flowbite-react";
 import { useState } from "react";
+import useAxios from "../hooks/useAxios";
+import { toast } from "react-toastify";
+import { Spinner } from "flowbite-react";
 
 export default function DataTable(props) {
   const months = [
@@ -18,7 +21,10 @@ export default function DataTable(props) {
     "Nov",
     "Dec",
   ];
+
+  const [loading, setLoading] = useState(false);
   const [openPaymentModal, setOpenPaymentModal] = useState(false);
+  const [isDelete, setIsDelete] = useState([]);
   const [inputValues, setInputValues] = useState({
     month: "",
     amount: "",
@@ -29,9 +35,19 @@ export default function DataTable(props) {
     navigate(`/${props.person.name}`);
   }
 
+  console.log({ loading });
+
   const deleteUser = (id) => {
-    props.onDeleteUser(id);
-    // e.stopPropagation()
+    isDelete.push(id);
+    useAxios({
+      method: "post",
+      url: `/members/delete/${id}`,
+      successCallBack: ({ message }) => {
+        toast.success(message);
+        props.getClient();
+      },
+      setLoading,
+    });
   };
 
   const handleInputChange = (event) => {
@@ -88,7 +104,7 @@ export default function DataTable(props) {
               <td className="py-3 px-4">{client.dateOfJoining}</td>
               <td className="py-3 px-4">{client.billingStatus}</td>
               <td className="py-3 px-4">
-                {!props.isDashboard && (
+                {props.isDashboard && (
                   <button
                     className="mr-2"
                     onClick={() => setPayment(client.id)}
@@ -99,9 +115,13 @@ export default function DataTable(props) {
                 <button className="mr-2">
                   <FaPenSquare size={20} />
                 </button>
-                <button className="" onClick={() => deleteUser(client._id)}>
-                  <FaRegTrashAlt size={20} />
-                </button>
+                {isDelete.includes(client._id) && loading ? (
+                  <Spinner aria-label="Default status example" />
+                ) : (
+                  <button className="" onClick={() => deleteUser(client._id)}>
+                    <FaRegTrashAlt size={20} />
+                  </button>
+                )}
               </td>
             </tr>
           ))}
