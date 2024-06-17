@@ -79,12 +79,12 @@ export default function DataTable(props) {
           </tr>
         </thead>
         <tbody>
-          {props.clients.map((client) => (
+          {props.clients.map((client,index) => (
             <tr
               key={client._id}
               className="border-b border-gray-200 text-black text-center"
             >
-              <td className="py-3 px-4">{client.id}</td>
+              <td className="py-3 px-4">{index + 1}</td>
 
               <td className="py-3 px-4 flex items-center justify-center gap-3">
                 <img

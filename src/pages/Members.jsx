@@ -1,11 +1,27 @@
-import { useState } from "react";
-import { Datepicker } from "flowbite-react";
+import { useEffect,useState } from "react";
 import DataTable from "../components/Table";
-import { Button, Modal, Label, TextInput, Select } from "flowbite-react";
+import { Button } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 
 function ClientDetails() {
+  const [members, setMembers] = useState([]);
+  const navigateTo = useNavigate();
+
+  const getClient = () => {
+    useAxios({
+      method: "get",
+      url: `/members`,
+      successCallBack: ({ data }) => {
+        setMembers(data);
+      },
+    });
+  };
+
+  useEffect(() => {
+    getClient();
+  }, []);
+
   const clients = [
     {
       id: 1,
@@ -24,48 +40,6 @@ function ClientDetails() {
       billingStatus: "Inactive",
     },
   ];
-  const navigateTo = useNavigate();
-
-  const [openModal, setOpenModal] = useState(false);
-  const [inputValues, setInputValues] = useState({
-    firstName: "",
-    lastName: "",
-    gender: "",
-  });
-  const [dateOfJoining, setJoiningDate] = useState("");
-  const [dateOfBirth, setBirthDate] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setInputValues({
-      ...inputValues,
-      [name]: value,
-    });
-  };
-
-  const handleJoiningDate = (date) => {
-    setJoiningDate(date);
-  };
-
-  const handlingBirthDate = (date) => {
-    setBirthDate(date);
-  };
-  const submitForm = () => {
-    let form = { ...inputValues, dateOfBirth, dateOfJoining };
-
-    useAxios({
-      method: "post",
-      url: `/members`,
-      body: form,
-      successCallBack: ({ message }) => {
-        console.log({ message });
-        // useSaveToken(null)
-        // toast.success(message)
-      },
-      setLoading,
-    });
-  };
   const tableHeaders = [
     "Sl. No",
     "Name",
@@ -79,105 +53,11 @@ function ClientDetails() {
     <div className="w-full p-10">
       <h3 className="font-semibold text-3xl">Members </h3>
       <div className="flex justify-end">
-        <Button className="mb-2" onClick={() => setOpenModal(true)}>
-          Add New 
+        <Button className="mb-2" onClick={() => navigateTo("/add-members")}>
+          Add New
         </Button>
       </div>
-      <DataTable clients={clients} headers={tableHeaders} />
-      <Modal
-        dismissible
-        show={openModal}
-        onClose={() => setOpenModal(false)}
-        className="overflow-visible"
-      >
-        <Modal.Body className="overflow-visible">
-          <form className="flex flex-col gap-4">
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="firstname" value="First Name" />
-              </div>
-              <TextInput
-                id="firstname"
-                type="text"
-                placeholder=""
-                required
-                onChange={handleInputChange}
-                name="firstName"
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="lname" value="Last Name" />
-              </div>
-              <TextInput
-                id="lname"
-                type="text"
-                required
-                onChange={handleInputChange}
-                name="lastName"
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="age" value="Age" />
-              </div>
-              <TextInput
-                id="age"
-                type="text"
-                required
-                onChange={handleInputChange}
-                name="age"
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="contact" value="Contact" />
-              </div>
-              <TextInput
-                id="contact"
-                type="text"
-                required
-                onChange={handleInputChange}
-                name="contact"
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="gender" value="Gender" />
-              </div>
-              <Select
-                id="countries"
-                required
-                onChange={handleInputChange}
-                name="gender"
-              >
-                <option value="">Choose one</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </Select>
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="joindate" value="Date of Joining" />
-              </div>
-              <Datepicker
-                onSelectedDateChanged={handleJoiningDate}
-                name="dateOfJoining"
-              />
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="dob" value="Date of Birth" />
-              </div>
-              <Datepicker
-                onSelectedDateChanged={handlingBirthDate}
-                name="dateOfBirth"
-              />
-            </div>
-            <Button onClick={submitForm}> Submit</Button>
-          </form>
-        </Modal.Body>
-      </Modal>
+      <DataTable clients={members} headers={tableHeaders} getClient={getClient} />
     </div>
   );
 }

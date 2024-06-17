@@ -1,42 +1,146 @@
+import { useState } from "react";
+import useAxios from "../hooks/useAxios";
 
-import { Button, Checkbox, Label, TextInput ,Select} from 'flowbite-react';
-import {Datepicker} from 'flowbite-react';
+import { Label, TextInput, Select, Button } from "flowbite-react"; // Import necessary components from Flowbite
+import { Datepicker } from "flowbite-react";
+import { Spinner } from "flowbite-react";
+import { toast } from "react-toastify";
 
-function AddNewMember() {
+function NewMemberForm() {
+  const [inputValues, setInputValues] = useState({
+    firstName: "",
+    lastName: "",
+    gender: "",
+    age: "",
+    contact: "",
+  });
+  const [dateOfJoining, setJoiningDate] = useState("");
+  const [dateOfBirth, setBirthDate] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
+    });
+  };
+
+  const handleJoiningDate = (date) => {
+    setJoiningDate(date);
+  };
+
+  const handleBirthDate = (date) => {
+    setBirthDate(date);
+  };
+  const submitForm = () => {
+    let form = { ...inputValues, dateOfBirth, dateOfJoining };
+
+    useAxios({
+      method: "post",
+      url: `/members`,
+      body: form,
+      successCallBack: ({ message }) => {
+        console.log({ message });
+        // useSaveToken(null)
+        toast.success(message)
+      },
+      setLoading,
+    });
+  };
+
   return (
-    <form className="flex max-w-md flex-col gap-4">
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="firstname" value="First Name" />
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">New Member Creation</h1>
+      <form className="flex flex-col gap-4" onSubmit={submitForm}>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="firstname" value="First Name" />
+          </div>
+          <TextInput
+            id="firstname"
+            type="text"
+            placeholder=""
+            required
+            onChange={handleInputChange}
+            name="firstName"
+          />
         </div>
-        <TextInput id="firstname" type="text" placeholder="" required />
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="lname" value="Last Name" />
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="lname" value="Last Name" />
+          </div>
+          <TextInput
+            id="lname"
+            type="text"
+            required
+            onChange={handleInputChange}
+            name="lastName"
+          />
         </div>
-        <TextInput id="lname" type="text" required />
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="gender" value="Gender" />
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="age" value="Age" />
+          </div>
+          <TextInput
+            id="age"
+            type="text"
+            required
+            onChange={handleInputChange}
+            name="age"
+          />
         </div>
-        <Select id="countries" required>
-        <option>Male</option>
-        <option>Female</option>
-      </Select>
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="joindate" value="Date of Joining" />
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="contact" value="Contact" />
+          </div>
+          <TextInput
+            id="contact"
+            type="text"
+            required
+            onChange={handleInputChange}
+            name="contact"
+          />
         </div>
-        <Datepicker
-          weekStart={1} // Monday
-        />
-      </div>
-      <Button type="submit">Submit</Button>
-    </form>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="gender" value="Gender" />
+          </div>
+          <Select
+            id="gender"
+            required
+            onChange={handleInputChange}
+            name="gender"
+          >
+            <option value="">Choose one</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </Select>
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="joindate" value="Date of Joining" />
+          </div>
+          <Datepicker
+            onSelectedDateChanged={handleJoiningDate}
+            name="dateOfJoining"
+          />
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="dob" value="Date of Birth" />
+          </div>
+          <Datepicker
+            onSelectedDateChanged={handleBirthDate}
+            name="dateOfBirth"
+          />
+        </div>
+        <Button onClick={submitForm}>
+          {loading ? <Spinner aria-label="Default status example" /> : "Submit"}{" "}
+        </Button>
+      </form>
+    </div>
   );
 }
 
-export default AddNewMember
+export default NewMemberForm;
