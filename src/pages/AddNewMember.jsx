@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useAxios from "../hooks/useAxios";
-
+import { useNavigate } from "react-router-dom";
 import { Label, TextInput, Select, Button } from "flowbite-react"; // Import necessary components from Flowbite
 import { Datepicker } from "flowbite-react";
 import { Spinner } from "flowbite-react";
 import { toast } from "react-toastify";
-
+import { useParams } from "react-router-dom";
 function NewMemberForm() {
+  const { id } = useParams();
+  const navigateTo = useNavigate();
+  const params = useParams();
+
   const [inputValues, setInputValues] = useState({
     firstName: "",
     lastName: "",
@@ -35,19 +39,46 @@ function NewMemberForm() {
   };
   const submitForm = () => {
     let form = { ...inputValues, dateOfBirth, dateOfJoining };
-
-    useAxios({
-      method: "post",
-      url: `/members`,
-      body: form,
-      successCallBack: ({ message }) => {
-        console.log({ message });
-        // useSaveToken(null)
-        toast.success(message);
-      },
-      setLoading,
-    });
+    if (id) {
+      useAxios({
+        method: "put",
+        url: `/members/update/${id}`,
+        body: form,
+        successCallBack: ({ message }) => {
+          toast.success(message);
+          navigateTo("/members");
+        },
+        setLoading,
+      });
+    } else {
+      useAxios({
+        method: "post",
+        url: `/members`,
+        body: form,
+        successCallBack: ({ message }) => {
+          toast.success(message);
+          navigateTo("/members");
+        },
+        setLoading,
+      });
+    }
   };
+
+  const getMemberDetails = () => {
+    if (id) {
+      useAxios({
+        method: "get",
+        url: `/members/${params.id}`,
+        successCallBack: ({ data }) => {
+          setInputValues(data);
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    getMemberDetails();
+  }, []);
 
   return (
     <div className="container flex flex-col  mx-auto p-4">
@@ -65,6 +96,7 @@ function NewMemberForm() {
               required
               onChange={handleInputChange}
               name="firstName"
+              value={inputValues.firstName}
             />
           </div>
           <div className="flex-1">
@@ -77,6 +109,7 @@ function NewMemberForm() {
               required
               onChange={handleInputChange}
               name="lastName"
+              value={inputValues.lastName}
             />
           </div>
         </div>
@@ -91,6 +124,7 @@ function NewMemberForm() {
               required
               onChange={handleInputChange}
               name="age"
+              value={inputValues.age}
             />
           </div>
           <div className="flex-1">
@@ -103,6 +137,7 @@ function NewMemberForm() {
               required
               onChange={handleInputChange}
               name="contact"
+              value={inputValues.contact}
             />
           </div>
         </div>
@@ -116,6 +151,7 @@ function NewMemberForm() {
             required
             onChange={handleInputChange}
             name="gender"
+            value={inputValues.gender}
           >
             <option value="">Choose one</option>
             <option value="male">Male</option>
@@ -130,6 +166,7 @@ function NewMemberForm() {
             <Datepicker
               onSelectedDateChanged={handleJoiningDate}
               name="dateOfJoining"
+              value={inputValues.dateOfJoining}
             />
           </div>
           <div className="flex-1">
@@ -139,6 +176,7 @@ function NewMemberForm() {
             <Datepicker
               onSelectedDateChanged={handleBirthDate}
               name="dateOfBirth"
+              value={inputValues.dateOfBirth}
             />
           </div>
         </div>
@@ -146,6 +184,8 @@ function NewMemberForm() {
           <Button onClick={submitForm} className="w-[110px]">
             {loading ? (
               <Spinner aria-label="Default status example" />
+            ) : id ? (
+              "Update"
             ) : (
               "Submit"
             )}{" "}

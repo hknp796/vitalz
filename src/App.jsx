@@ -22,6 +22,7 @@ function App() {
         <Route path="/billing" element={<Billing />} />
         <Route path="/inventories" element={<Inventories />} />
         <Route path="/add-members" element={<AddMember />} />
+        <Route path="/add-members/:id" element={<AddMember />} />
       </Routes>
     </div>
   );

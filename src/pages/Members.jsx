@@ -1,11 +1,12 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import DataTable from "../components/Table";
-import { Button } from "flowbite-react";
+import { Button, Spinner } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 
 function ClientDetails() {
   const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigateTo = useNavigate();
 
   const getClient = () => {
@@ -15,6 +16,7 @@ function ClientDetails() {
       successCallBack: ({ data }) => {
         setMembers(data);
       },
+      setLoading,
     });
   };
 
@@ -22,24 +24,6 @@ function ClientDetails() {
     getClient();
   }, []);
 
-  const clients = [
-    {
-      id: 1,
-      name: "John Doe",
-      age: 30,
-      contact: "123-456-7890",
-      dateOfJoining: "12-21-211",
-      billingStatus: "Active",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      age: 25,
-      contact: "987-654-3210",
-      dateOfJoining: "12-21-211",
-      billingStatus: "Inactive",
-    },
-  ];
   const tableHeaders = [
     "Sl. No",
     "Name",
@@ -57,7 +41,22 @@ function ClientDetails() {
           Add New
         </Button>
       </div>
-      <DataTable clients={members} headers={tableHeaders} getClient={getClient} />
+
+      {loading ? (
+        <div className="flex items-center justify-center">
+          <Spinner
+            aria-label="Extra large spinner example"
+            className="flex justify-center"
+            size="xl"
+          />
+        </div>
+      ) : (
+        <DataTable
+          clients={members}
+          headers={tableHeaders}
+          getClient={getClient}
+        />
+      )}
     </div>
   );
 }

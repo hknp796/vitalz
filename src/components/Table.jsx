@@ -66,6 +66,11 @@ export default function DataTable(props) {
     setOpenPaymentModal(true);
     // api calls
   };
+
+  const editMembers = (id) => {
+    navigate(`/add-members/${id}`);
+
+  }
   return (
     <div className="">
       <table className="w-full">
@@ -112,7 +117,7 @@ export default function DataTable(props) {
                     <FaRupeeSign size={20} />
                   </button>
                 )}
-                <button className="mr-2">
+                <button className="mr-2" onClick={()=>editMembers(client._id)}>
                   <FaPenSquare size={20} />
                 </button>
                 {isDelete.includes(client._id) && loading ? (
