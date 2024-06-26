@@ -43,65 +43,70 @@ function NewMemberForm() {
       successCallBack: ({ message }) => {
         console.log({ message });
         // useSaveToken(null)
-        toast.success(message)
+        toast.success(message);
       },
       setLoading,
     });
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container flex flex-col  mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">New Member Creation</h1>
-      <form className="flex flex-col gap-4" onSubmit={submitForm}>
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="firstname" value="First Name" />
+      <form className="flex flex-col gap-4 " onSubmit={submitForm}>
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <div className="mb-2 block">
+              <Label htmlFor="firstname" value="First Name" />
+            </div>
+            <TextInput
+              id="firstname"
+              type="text"
+              placeholder=""
+              required
+              onChange={handleInputChange}
+              name="firstName"
+            />
           </div>
-          <TextInput
-            id="firstname"
-            type="text"
-            placeholder=""
-            required
-            onChange={handleInputChange}
-            name="firstName"
-          />
-        </div>
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="lname" value="Last Name" />
+          <div className="flex-1">
+            <div className="mb-2 block">
+              <Label htmlFor="lname" value="Last Name" />
+            </div>
+            <TextInput
+              id="lname"
+              type="text"
+              required
+              onChange={handleInputChange}
+              name="lastName"
+            />
           </div>
-          <TextInput
-            id="lname"
-            type="text"
-            required
-            onChange={handleInputChange}
-            name="lastName"
-          />
         </div>
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="age" value="Age" />
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <div className="mb-2 block">
+              <Label htmlFor="age" value="Age" />
+            </div>
+            <TextInput
+              id="age"
+              type="text"
+              required
+              onChange={handleInputChange}
+              name="age"
+            />
           </div>
-          <TextInput
-            id="age"
-            type="text"
-            required
-            onChange={handleInputChange}
-            name="age"
-          />
-        </div>
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="contact" value="Contact" />
+          <div className="flex-1">
+            <div className="mb-2 block">
+              <Label htmlFor="contact" value="Contact" />
+            </div>
+            <TextInput
+              id="contact"
+              type="text"
+              required
+              onChange={handleInputChange}
+              name="contact"
+            />
           </div>
-          <TextInput
-            id="contact"
-            type="text"
-            required
-            onChange={handleInputChange}
-            name="contact"
-          />
         </div>
+
         <div>
           <div className="mb-2 block">
             <Label htmlFor="gender" value="Gender" />
@@ -117,27 +122,35 @@ function NewMemberForm() {
             <option value="female">Female</option>
           </Select>
         </div>
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="joindate" value="Date of Joining" />
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <div className="mb-2 block">
+              <Label htmlFor="joindate" value="Date of Joining" />
+            </div>
+            <Datepicker
+              onSelectedDateChanged={handleJoiningDate}
+              name="dateOfJoining"
+            />
           </div>
-          <Datepicker
-            onSelectedDateChanged={handleJoiningDate}
-            name="dateOfJoining"
-          />
-        </div>
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="dob" value="Date of Birth" />
+          <div className="flex-1">
+            <div className="mb-2 block">
+              <Label htmlFor="dob" value="Date of Birth" />
+            </div>
+            <Datepicker
+              onSelectedDateChanged={handleBirthDate}
+              name="dateOfBirth"
+            />
           </div>
-          <Datepicker
-            onSelectedDateChanged={handleBirthDate}
-            name="dateOfBirth"
-          />
         </div>
-        <Button onClick={submitForm}>
-          {loading ? <Spinner aria-label="Default status example" /> : "Submit"}{" "}
-        </Button>
+        <div className="flex justify-end">
+          <Button onClick={submitForm} className="w-[110px]">
+            {loading ? (
+              <Spinner aria-label="Default status example" />
+            ) : (
+              "Submit"
+            )}{" "}
+          </Button>
+        </div>
       </form>
     </div>
   );
