@@ -5,6 +5,7 @@ import { useState } from "react";
 import useAxios from "../hooks/useAxios";
 import { toast } from "react-toastify";
 import { Spinner } from "flowbite-react";
+import moment from 'moment';
 
 export default function DataTable(props) {
   const months = [
@@ -106,7 +107,7 @@ export default function DataTable(props) {
               </td>
               <td className="py-3 px-4">{client.age}</td>
               <td className="py-3 px-4">{client.contact}</td>
-              <td className="py-3 px-4">{client.dateOfJoining}</td>
+              <td className="py-3 px-4">{moment(client.dateOfJoining).format('DD-MM-YYYY')}</td>
               <td className="py-3 px-4">{client.billingStatus}</td>
               <td className="py-3 px-4">
                 {props.isDashboard && (
