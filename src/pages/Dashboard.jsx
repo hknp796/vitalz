@@ -4,11 +4,15 @@ import { useEffect, useState } from "react";
 import Chart from "../components/Chart";
 import DataTable from "../components/Table";
 import CustomTabs from "../components/Tabs";
-import { toast } from 'react-toastify';
-
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { decrement, increment } from "./../redux/counter";
 
 function Dashboard() {
-const [members, setMembers] = useState([]);
+  const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
+
+  const [members, setMembers] = useState([]);
 
   const getClient = () => {
     useAxios({
@@ -23,8 +27,6 @@ const [members, setMembers] = useState([]);
   useEffect(() => {
     getClient();
   }, []);
-
-
 
   const labels = [
     "January",
@@ -103,17 +105,17 @@ const [members, setMembers] = useState([]);
     {
       title: "Clients",
       content: (
-        <DataTable clients={members} headers={tableHeaders} getClient={getClient} isDashboard />
+        <DataTable
+          clients={members}
+          headers={tableHeaders}
+          getClient={getClient}
+          isDashboard
+        />
       ),
     },
     {
       title: "Trainers",
-      content: (
-        <DataTable
-          clients={mangement}
-          headers={employeeTableHeaders}
-        />
-      ),
+      content: <DataTable clients={mangement} headers={employeeTableHeaders} />,
     },
     // Add more tabs as needed
   ];
@@ -124,7 +126,8 @@ const [members, setMembers] = useState([]);
         <Chart data={data} title="Current Members" />
         <Chart data={data} title="New Members" />
       </div>
-      <div></div>
+      <div>
+      </div>
       <div className="mt-8">
         <CustomTabs tabs={tabs} />
       </div>
