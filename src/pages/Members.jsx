@@ -30,8 +30,8 @@ function ClientDetails() {
     "Age",
     "Contact",
     "Date of Joining",
-    "Billing Status",
     "",
+    '',
   ];
   return (
     <div className="w-full p-10">

@@ -5,6 +5,7 @@ import Inventories from "./pages/Inventories";
 import Billing from "./pages/Billing";
 import Dashboard from "./pages/Dashboard";
 import AddMember from "./pages/AddNewMember";
+import ViewMember from "./pages/viewMember";
 import Login from "./pages/Login";
 import Toast from "./components/Toast";
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/inventories" element={<Inventories />} />
         <Route path="/add-members" element={<AddMember />} />
         <Route path="/add-members/:id" element={<AddMember />} />
+        <Route path="/members/view/:id" element={<ViewMember />} />
       </Routes>
     </div>
   );

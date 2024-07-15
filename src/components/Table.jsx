@@ -1,4 +1,4 @@
-import { FaPenSquare, FaRegTrashAlt, FaRupeeSign } from "react-icons/fa";
+import { FaEye, FaPenSquare, FaRegTrashAlt, FaRupeeSign } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, Label, TextInput, Select } from "flowbite-react";
 import { useState } from "react";
@@ -70,8 +70,12 @@ export default function DataTable(props) {
 
   const editMembers = (id) => {
     navigate(`/add-members/${id}`);
-
   }
+
+  const viewMembers = (id) => {
+    navigate(`/members/view/${id}`);
+  }
+
   return (
     <div className="">
       <table className="w-full">
@@ -110,6 +114,9 @@ export default function DataTable(props) {
               <td className="py-3 px-4">{moment(client.dateOfJoining).format('DD-MM-YYYY')}</td>
               <td className="py-3 px-4">{client.billingStatus}</td>
               <td className="py-3 px-4">
+              <button className="mr-2" onClick={()=>viewMembers(client._id)}>
+                  <FaEye size={20} />
+                </button>
                 {props.isDashboard && (
                   <button
                     className="mr-2"
@@ -118,6 +125,7 @@ export default function DataTable(props) {
                     <FaRupeeSign size={20} />
                   </button>
                 )}
+               
                 <button className="mr-2" onClick={()=>editMembers(client._id)}>
                   <FaPenSquare size={20} />
                 </button>

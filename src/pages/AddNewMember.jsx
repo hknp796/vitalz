@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import moment from 'moment';
 import useAxios from "../hooks/useAxios";
 import { useNavigate } from "react-router-dom";
 import { Label, TextInput, Select, Button } from "flowbite-react"; // Import necessary components from Flowbite
@@ -31,11 +32,13 @@ function NewMemberForm() {
   };
 
   const handleJoiningDate = (date) => {
-    setJoiningDate(date);
+   const formatedDate =  moment(date).format('DD-MM-YYYY')
+    setJoiningDate(formatedDate);
   };
 
   const handleBirthDate = (date) => {
-    setBirthDate(date);
+   const formatedDate =  moment(date).format('DD-MM-YYYY')
+    setBirthDate(formatedDate);
   };
   const submitForm = () => {
     let form = { ...inputValues, dateOfBirth, dateOfJoining };
@@ -70,7 +73,10 @@ function NewMemberForm() {
         method: "get",
         url: `/members/${params.id}`,
         successCallBack: ({ data }) => {
+          console.log({data});
           setInputValues(data);
+          setJoiningDate(data.dateOfJoining)
+          setBirthDate(data.dateOfBirth)
         },
       });
     }
@@ -166,7 +172,7 @@ function NewMemberForm() {
             <Datepicker
               onSelectedDateChanged={handleJoiningDate}
               name="dateOfJoining"
-              value={inputValues.dateOfJoining}
+              value={dateOfJoining}
             />
           </div>
           <div className="flex-1">
@@ -176,7 +182,7 @@ function NewMemberForm() {
             <Datepicker
               onSelectedDateChanged={handleBirthDate}
               name="dateOfBirth"
-              value={inputValues.dateOfBirth}
+              value={dateOfBirth}
             />
           </div>
         </div>
