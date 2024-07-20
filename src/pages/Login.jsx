@@ -10,23 +10,17 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleInputChange = (event) => {
-    const { email, password } = event.target;
-    setEmail(email);
-    setPassword(password);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+
     useAxios({
       method: "post",
       url: `/login`,
       body: {
-        email: "af",
-        password: "hello",
+        email: email,
+        password: password,
       },
       successCallBack: ({ message }) => {
-        console.log("success");
         useSaveToken(null);
         // navigate("/");
         toast.success(message);
@@ -38,21 +32,26 @@ function Login() {
       <form className="flex flex-col gap-4">
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="email1" value="Your email" />
+            <Label htmlFor="email" value="Your email" />
           </div>
           <TextInput
-            id="email1"
             type="email"
+            name="email"
             placeholder="name@flowbite.com"
             required
-            onChange={handleInputChange}
+            onChange={(event) => setEmail(event.target.value)}
           />
         </div>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="password1" value="Your password" />
+            <Label htmlFor="password" value="Your password" />
           </div>
-          <TextInput id="password1" type="password" required />
+          <TextInput
+            type="password"
+            required
+            name="password"
+            onChange={(event) => setPassword(event.target.value)}
+          />
         </div>
         <div className="flex items-center gap-2">
           <Checkbox id="remember" />
