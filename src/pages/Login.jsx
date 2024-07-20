@@ -1,50 +1,69 @@
+import React, { useEffect, useState } from "react";
+import { Card, Label, TextInput, Checkbox, Button } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import useAxios from '../hooks/useAxios';
+import useAxios from "../hooks/useAxios";
 function Login() {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        navigate("/");
-        return
-        e.preventDefault()
-        useAxios({
-            method: 'post',
-            url: `${import.meta.env.VITE_REACT_APP_API_BASE_URL}/login`,
-            body:{
-                email:'af',
-                password:'hello'
-            },
-            successCallBack: ({ message }) => {
-                console.log({message});
-                useSaveToken(null)
-                // toast.success(message)
-            }
-        })
-    }
-    return (
-        <div className='bg-[#19191A] h-[98vh] m-2 md:flex justify-center items-center '>
-            <div className='w-[100%] h-[100%] md:w-[50%] md:block  hidden'><img src="/homeImage.jpg" alt="" className='object-cover h-[100%] w-[100%]' /></div>
-            <div className='w-[100%] h-[100%] md:w-[50%] flex justify-center items-center'>
-                <form className='md:w-[40%] w-[80%] '>
-                    <div className="mb-6">
-                        <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">Your email</label>
-                        <input type="email" id="email" className=" text-white bg-[#121213] border border-gray-500  text-sm rounded-lg block w-full p-5 focus:ring-blue-500 " placeholder="name@flowbite.com" required />
-                    </div>
-                    <div className="mb-6">
-                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-white">Your password</label>
-                        <input type="password" id="password" className="text-white bg-[#121213] border border-gray-500  text-sm rounded-lg block w-full p-5 focus:ring-blue-500 " placeholder="name@flowbite.com" required />
-                    </div>
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-                    <button type="submit" className=" text-gray-300 bg-gray-500 font-medium rounded-lg text-sm  w-[100%] px-5 py-5 text-center " onClick={handleSubmit}>Sign In</button>
-                    <div className="flex items-start mb-6">
-                        <label htmlFor="remember" className="mt-5 text-sm font-medium text-white text-center  w-[100%]">Forgot Password</label>
-                    </div>
-                </form>
-            </div>
+  const handleInputChange = (event) => {
+    const { email, password } = event.target;
+    setEmail(email);
+    setPassword(password);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    useAxios({
+      method: "post",
+      url: `/login`,
+      body: {
+        email: "af",
+        password: "hello",
+      },
+      successCallBack: ({ message }) => {
+        console.log("success");
+        useSaveToken(null);
+        // navigate("/");
+        toast.success(message);
+      },
+    });
+  };
+  return (
+    <Card className="w-[30%]">
+      <form className="flex flex-col gap-4">
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="email1" value="Your email" />
+          </div>
+          <TextInput
+            id="email1"
+            type="email"
+            placeholder="name@flowbite.com"
+            required
+            onChange={handleInputChange}
+          />
         </div>
-    )
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="password1" value="Your password" />
+          </div>
+          <TextInput id="password1" type="password" required />
+        </div>
+        <div className="flex items-center gap-2">
+          <Checkbox id="remember" />
+          <Label htmlFor="remember">Remember me</Label>
+        </div>
+        <Button isProcessing={false} type="submit" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </form>
+    </Card>
+  );
 }
 
-export default Login
+export default Login;

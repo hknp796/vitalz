@@ -1,4 +1,5 @@
 import api from 'axios'
+import { toast } from "react-toastify";
 
 const useAxios = async ({ method, url, body, setLoading, successCallBack }) => {
     setLoading && setLoading(true)
@@ -9,7 +10,7 @@ const useAxios = async ({ method, url, body, setLoading, successCallBack }) => {
         successCallBack(data)
     }
     catch (err) {
-        console.log(err,'err');
+        toast.error(err.response.data.msg);
     }
     finally {
         setLoading && setLoading(false)
