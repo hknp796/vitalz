@@ -9,6 +9,7 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,6 +26,7 @@ function Login() {
         // navigate("/");
         toast.success(message);
       },
+      setLoading,
     });
   };
   return (
@@ -57,7 +59,7 @@ function Login() {
           <Checkbox id="remember" />
           <Label htmlFor="remember">Remember me</Label>
         </div>
-        <Button isProcessing={false} type="submit" onClick={handleSubmit}>
+        <Button isProcessing={loading} type="submit" onClick={handleSubmit}>
           Submit
         </Button>
       </form>
