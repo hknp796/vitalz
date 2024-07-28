@@ -28,11 +28,8 @@ export default function CTAButton() {
   };
   return (
     <div>
-      <Sidebar className="h-[100vh]">
-        <h2 className="text-black font-bold text-3xl px-2 text-center p-4">
-          Vitalz
-        </h2>
-        <Sidebar.Items className="flex flex-col h-[calc(100%-70px)]  justify-between">
+      <Sidebar className="h-[100vh] bg-cyan-700">
+        <Sidebar.Items className="flex flex-col h-[calc(100%-70px)]  justify-between bg-cyan-700">
           <Sidebar.ItemGroup>
             {sidebarItems.map((item, index) => (
               <Sidebar.Item

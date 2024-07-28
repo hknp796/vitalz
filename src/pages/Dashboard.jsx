@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Chart from "../components/Chart";
 import DataTable from "../components/Table";
 import CustomTabs from "../components/Tabs";
+import Navbar from "../components/TopNavbar";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { decrement, increment } from "./../redux/counter";
@@ -126,8 +127,7 @@ function Dashboard() {
         <Chart data={data} title="Current Members" />
         <Chart data={data} title="New Members" />
       </div>
-      <div>
-      </div>
+
       <div className="mt-8">
         <CustomTabs tabs={tabs} />
       </div>
