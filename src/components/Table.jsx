@@ -5,7 +5,7 @@ import { useState } from "react";
 import useAxios from "../hooks/useAxios";
 import { toast } from "react-toastify";
 import { Spinner } from "flowbite-react";
-import moment from 'moment';
+import moment from "moment";
 
 export default function DataTable(props) {
   const months = [
@@ -70,77 +70,90 @@ export default function DataTable(props) {
 
   const editMembers = (id) => {
     navigate(`/add-members/${id}`);
-  }
+  };
 
   const viewMembers = (id) => {
     navigate(`/members/view/${id}`);
-  }
+  };
 
   return (
     <div className="">
-      <table className="w-full">
-        <thead>
-          <tr className="bg-gray-200 text-gray-700">
-            {props.headers.map((header, index) => (
-              <th key={index} className="py-2 px-4">
-                {header}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {props.clients.map((client,index) => (
-            <tr
-              key={client._id}
-              className="border-b border-gray-200 text-black text-center"
-            >
-              <td className="py-3 px-4">{index + 1}</td>
+      <div className="rounded-lg border">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-gray-200 text-gray-700">
+              {props.headers.map((header, index) => (
+                <th key={index} className="py-2 px-4">
+                  {header}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {props.clients.map((client, index) => (
+              <tr
+                key={client._id}
+                className={`border-b border-gray-200 text-black text-center ${
+                  (index + 1) % 2 === 0 ? "bg-blue-200" : ""
+                }`}
+              >
+                <td className="py-3 px-4">{index + 1}</td>
 
-              <td className="py-3 px-4 flex items-center justify-center gap-3">
-                <img
-                  src="https://gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg"
-                  alt="Profile"
-                  className="w-8 h-8 rounded-full"
-                />
-                <div className="">
-                  <div>{client.firstName}</div>
-                  <div className="text-xs text-gray-500">
-                    {client.billingStatus}
+                <td className="py-3 px-4 flex items-center justify-center gap-3">
+                  <img
+                    src="https://gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg"
+                    alt="Profile"
+                    className="w-8 h-8 rounded-full"
+                  />
+                  <div className="">
+                    <div>{client.firstName}</div>
+                    <div className="text-xs text-gray-500">
+                      {client.billingStatus}
+                    </div>
                   </div>
-                </div>
-              </td>
-              <td className="py-3 px-4">{client.age}</td>
-              <td className="py-3 px-4">{client.contact}</td>
-              <td className="py-3 px-4">{moment(client.dateOfJoining).format('DD-MM-YYYY')}</td>
-              <td className="py-3 px-4">{client.billingStatus}</td>
-              <td className="py-3 px-4">
-              <button className="mr-2" onClick={()=>viewMembers(client._id)}>
-                  <FaEye size={20} />
-                </button>
-                {props.isDashboard && (
+                </td>
+                <td className="py-3 px-4">{client.age}</td>
+                <td className="py-3 px-4">{client.contact}</td>
+                <td className="py-3 px-4">
+                  {moment(client.dateOfJoining).format("DD-MM-YYYY")}
+                </td>
+                <td className="py-3 px-4">{client.billingStatus}</td>
+                <td className="py-3 px-4">
                   <button
                     className="mr-2"
-                    onClick={() => setPayment(client.id)}
+                    onClick={() => viewMembers(client._id)}
                   >
-                    <FaRupeeSign size={20} />
+                    <FaEye size={20} />
                   </button>
-                )}
-               
-                <button className="mr-2" onClick={()=>editMembers(client._id)}>
-                  <FaPenSquare size={20} />
-                </button>
-                {isDelete.includes(client._id) && loading ? (
-                  <Spinner aria-label="Default status example" />
-                ) : (
-                  <button className="" onClick={() => deleteUser(client._id)}>
-                    <FaRegTrashAlt size={20} />
+                  {props.isDashboard && (
+                    <button
+                      className="mr-2"
+                      onClick={() => setPayment(client.id)}
+                    >
+                      <FaRupeeSign size={20} />
+                    </button>
+                  )}
+
+                  <button
+                    className="mr-2"
+                    onClick={() => editMembers(client._id)}
+                  >
+                    <FaPenSquare size={20} />
                   </button>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                  {isDelete.includes(client._id) && loading ? (
+                    <Spinner aria-label="Default status example" />
+                  ) : (
+                    <button className="" onClick={() => deleteUser(client._id)}>
+                      <FaRegTrashAlt size={20} />
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
       <Modal
         dismissible
         show={openPaymentModal}
