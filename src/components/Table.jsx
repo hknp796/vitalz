@@ -25,9 +25,11 @@ export default function DataTable(props) {
   ];
 
   const [loading, setLoading] = useState(false);
+  const [paymentLoading, setPaymentLoading] = useState(false);
   const [openPaymentModal, setOpenPaymentModal] = useState(false);
   const [isDelete, setIsDelete] = useState([]);
   const [deleteId, setDeleteId] = useState();
+  const [paymentId, setPaymentId] = useState();
   const [isOpenDeleteConfirm, setIsOpenDeleteConfirm] = useState(false);
   const [inputValues, setInputValues] = useState({
     month: "",
@@ -66,12 +68,21 @@ export default function DataTable(props) {
   };
 
   const submitForm = () => {
-    console.log(inputValues);
+    useAxios({
+      method: "post",
+      url: `/members/payment/${paymentId}`,
+      body: inputValues,
+      successCallBack: ({ message }) => {
+        toast.success(message);
+        setOpenPaymentModal(false);
+      },
+      setLoading: setPaymentLoading,
+    });
   };
 
   const setPayment = (id) => {
     setOpenPaymentModal(true);
-    // api calls
+    setPaymentId(id);
   };
 
   const editMembers = (id) => {
@@ -134,7 +145,7 @@ export default function DataTable(props) {
                   {props.isDashboard && (
                     <button
                       className="mr-2 bg-gray-100 p-2 rounded-lg"
-                      onClick={() => setPayment(client.id)}
+                      onClick={() => setPayment(client._id)}
                     >
                       <FaRupeeSign size={20} />
                     </button>
@@ -201,7 +212,13 @@ export default function DataTable(props) {
             />
           </div>
           <div className="flex justify-end mt-3">
-            <Button onClick={submitForm}> Add Payment</Button>
+            <Button onClick={submitForm}>
+              {paymentLoading ? (
+                <Spinner aria-label="Default status example" />
+              ) : (
+                "Add Payment"
+              )}
+            </Button>
           </div>
         </Modal.Body>
       </Modal>
