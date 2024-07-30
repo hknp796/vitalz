@@ -1,6 +1,7 @@
 import { FaEye, FaPenSquare, FaRegTrashAlt, FaRupeeSign } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, Label, TextInput, Select } from "flowbite-react";
+import ConfirmDelete from "../components/ConfirmDelete";
 import { useState } from "react";
 import useAxios from "../hooks/useAxios";
 import { toast } from "react-toastify";
@@ -26,6 +27,8 @@ export default function DataTable(props) {
   const [loading, setLoading] = useState(false);
   const [openPaymentModal, setOpenPaymentModal] = useState(false);
   const [isDelete, setIsDelete] = useState([]);
+  const [deleteId, setDeleteId] = useState();
+  const [isOpenDeleteConfirm, setIsOpenDeleteConfirm] = useState(false);
   const [inputValues, setInputValues] = useState({
     month: "",
     amount: "",
@@ -36,13 +39,16 @@ export default function DataTable(props) {
     navigate(`/${props.person.name}`);
   }
 
-  console.log({ loading });
-
-  const deleteUser = (id) => {
+  const setDeleteMember = (id) => {
     isDelete.push(id);
+    setDeleteId(id);
+    setIsOpenDeleteConfirm(true);
+  };
+
+  const deleteUser = () => {
     useAxios({
       method: "post",
-      url: `/members/delete/${id}`,
+      url: `/members/delete/${deleteId}`,
       successCallBack: ({ message }) => {
         toast.success(message);
         props.getClient();
@@ -120,14 +126,14 @@ export default function DataTable(props) {
                 <td className="py-3 px-4">{client.billingStatus}</td>
                 <td className="py-3 px-4">
                   <button
-                    className="mr-2"
+                    className="mr-2 bg-gray-100 p-2 rounded-lg"
                     onClick={() => viewMembers(client._id)}
                   >
                     <FaEye size={20} />
                   </button>
                   {props.isDashboard && (
                     <button
-                      className="mr-2"
+                      className="mr-2 bg-gray-100 p-2 rounded-lg"
                       onClick={() => setPayment(client.id)}
                     >
                       <FaRupeeSign size={20} />
@@ -135,7 +141,7 @@ export default function DataTable(props) {
                   )}
 
                   <button
-                    className="mr-2"
+                    className="mr-2 bg-gray-100 p-2 rounded-lg"
                     onClick={() => editMembers(client._id)}
                   >
                     <FaPenSquare size={20} />
@@ -143,7 +149,10 @@ export default function DataTable(props) {
                   {isDelete.includes(client._id) && loading ? (
                     <Spinner aria-label="Default status example" />
                   ) : (
-                    <button className="" onClick={() => deleteUser(client._id)}>
+                    <button
+                      className="bg-gray-100 p-2 rounded-lg"
+                      onClick={() => setDeleteMember(client._id)}
+                    >
                       <FaRegTrashAlt size={20} />
                     </button>
                   )}
@@ -196,6 +205,11 @@ export default function DataTable(props) {
           </div>
         </Modal.Body>
       </Modal>
+      <ConfirmDelete
+        isOpen={isOpenDeleteConfirm}
+        confirm={deleteUser}
+        closeModal={() => setIsOpenDeleteConfirm(false)}
+      />
     </div>
   );
 }

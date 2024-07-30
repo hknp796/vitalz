@@ -31,7 +31,7 @@ function ClientDetails() {
     "Contact",
     "Date of Joining",
     "",
-    '',
+    "",
   ];
   return (
     <div className="w-full p-10">
