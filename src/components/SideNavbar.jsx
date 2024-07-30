@@ -28,8 +28,8 @@ export default function CTAButton() {
   };
   return (
     <div>
-      <Sidebar className="h-[100vh] bg-cyan-700">
-        <Sidebar.Items className="flex flex-col h-[calc(100%-70px)]  justify-between bg-cyan-700">
+      <Sidebar className="h-[100vh] ">
+        <Sidebar.Items className="flex flex-col h-[calc(100%-70px)]  justify-between ">
           <Sidebar.ItemGroup>
             {sidebarItems.map((item, index) => (
               <Sidebar.Item
@@ -41,11 +41,6 @@ export default function CTAButton() {
                 <p>{item.text}</p>
               </Sidebar.Item>
             ))}
-          </Sidebar.ItemGroup>
-          <Sidebar.ItemGroup>
-            <Sidebar.Item href="#" icon={HiChartPie} onClick={handleLogout}>
-              Logout
-            </Sidebar.Item>
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>
