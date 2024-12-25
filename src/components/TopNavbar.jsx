@@ -1,10 +1,17 @@
 import { Avatar, Dropdown, Navbar, Popover } from "flowbite-react";
 import { IoIosNotifications } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+
 export default function Component() {
+  const navigateTo = useNavigate();
+
   return (
     <Navbar className="bg-gray-50  ">
       <div className="flex justify-between w-full">
-        <h2 className="font-bold text-3xl text-center bg-gray-50 text-gray-900 ">
+        <h2
+          onClick={() => navigateTo("/")}
+          className="font-bold text-3xl text-center bg-gray-50 text-gray-900 "
+        >
           Vitalz
         </h2>
         <div className="flex gap-4 items-center w-[100%] justify-end">
