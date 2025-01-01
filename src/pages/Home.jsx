@@ -8,6 +8,14 @@ import { FaPlus, FaSearch } from "react-icons/fa";
 import MyModal from "../components/Modal";
 import SideCard from "../components/SideCard";
 import SideNavbar from "../components/SideNavbar";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card"
 
 function Home() {
   let [isOpen, setIsOpen] = useState(false);
@@ -99,39 +107,19 @@ function Home() {
   const home = false;
   return (
     <div className="h-[100vh]">
-      {/* <div className=" md:align-middle  py-3 p-3 mb-10">
-        <MyModal isOpen={isOpen} onChildEvent={handleChildEvent} />
-      </div> */}
-      <div className="flex flex-wrap md:flex md:flex-nowrap md:gap-10">
-        <div className="w-[100%]">
-          <div className="flex items-center flex-wrap md:flex md:items-center justify-between gap-4 mt-10 md:mt-0 p-3">
-            <h3 className="text-white  font-bold"> People</h3>
-            <div className="flex gap-4 ">
-              <Tab getClients={getClient} getManagementData={getManagement} />
-              <button
-                className=" bg-[#1377FF] rounded-[50%] flex items-center justify-center text-white w-10 h-10"
-                onClick={closeModal}
-              >
-                <FaPlus />
-              </button>
-              <button className=" bg-[#424345] rounded-[50%] flex items-center justify-center text-white w-10 h-10">
-                <FaSearch />
-              </button>
-            </div>
-          </div>
-          {isLoading ? (
-            <div className="flex justify-center align-middle items-center">
-              <Spinner
-                aria-label="Info spinner example"
-                color="info"
-                size="xl"
-              />
-            </div>
-          ) : (
-            <Table clients={clients} headers={tableHeaders} home={true} />
-          )}
-        </div>
-      </div>
+         <Card >
+      <CardHeader>
+        <CardTitle>Notifications</CardTitle>
+        <CardDescription>You have 3 unread messages.</CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-4">
+sdfasfd
+
+      </CardContent>
+      <CardFooter>
+       
+      </CardFooter>
+    </Card>
     </div>
   );
 }
