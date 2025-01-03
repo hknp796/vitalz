@@ -3,55 +3,67 @@ import { useState } from "react";
 import {
   HiChartPie,
   HiUsers,
-  HiCash,
   HiOutlineExclamationCircle,
   HiHome,
+  HiPencilAlt,
+  HiCreditCard,
+  HiOutlineLogout,
 } from "react-icons/hi";
+import { MdInventory } from "react-icons/md";
+import { FaDumbbell } from "react-icons/fa6";
+import { RiGitRepositoryFill } from "react-icons/ri";
+import { ImBook } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
 
 const sidebarItems = [
-  { link: "/dashboard", icon: HiChartPie, text: "Dashboard" },
-  { link: "/members", icon: HiUsers, text: "Members" },
-  { link: "/billing", icon: HiCash, text: "Billing" },
-  { link: "/inventories", icon: HiHome, text: "Inventory" },
+  { link: "/", icon: HiChartPie, text: "Dashboard" },
+  { link: "/inventories", icon: HiHome, text: "Admin Profile" },
+  { link: "/inventories", icon: HiPencilAlt, text: "Registration" },
+  { link: "/inventories", icon: ImBook, text: "Plan" },
+  { link: "/billing", icon: HiCreditCard, text: "Payment" },
+  { link: "/inventories", icon: MdInventory, text: "Inventory" },
+  { link: "/members", icon: HiUsers, text: "View Members" },
+  { link: "/inventories", icon: FaDumbbell, text: "Coaches" },
+  { link: "/inventories", icon: RiGitRepositoryFill, text: "Report" },
 ];
 
 export default function CTAButton() {
-  const [openModal, setOpenModal] = useState(false);
-  const navigateTo = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const handleNavigation = (path) => {
-    navigateTo(path);
-  };
+  const handleNavigation = (path) => navigate(path);
 
-  const handleLogout = () => {
-    setOpenModal(true);
-  };
+  const toggleModal = () => setIsModalOpen((prev) => !prev);
+
   return (
     <div>
-      <Sidebar className="h-[100vh] ">
-        <Sidebar.Items className="flex flex-col h-[calc(100%-70px)]  justify-between ">
+      <Sidebar className="h-screen">
+        <Sidebar.Items className="flex flex-col h-[calc(100%-70px)] justify-between">
           <Sidebar.ItemGroup>
-            {sidebarItems.map((item, index) => (
+            {sidebarItems.map(({ link, icon: Icon, text }, index) => (
               <Sidebar.Item
-                className="cursor-pointer"
                 key={index}
-                icon={item.icon}
-                onClick={() => handleNavigation(item.link)}
+                icon={Icon}
+                className="cursor-pointer"
+                onClick={() => handleNavigation(link)}
               >
-                <p>{item.text}</p>
+                {text}
               </Sidebar.Item>
             ))}
+          </Sidebar.ItemGroup>
+          <Sidebar.ItemGroup>
+            <Sidebar.Item
+              icon={HiOutlineLogout}
+              className="cursor-pointer"
+              onClick={toggleModal}
+            >
+              Logout
+            </Sidebar.Item>
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>
 
-      <Modal
-        show={openModal}
-        size="md"
-        onClose={() => setOpenModal(false)}
-        popup
-      >
+      <Modal show={isModalOpen} size="md" onClose={toggleModal} popup>
         <Modal.Header />
         <Modal.Body>
           <div className="text-center">
@@ -60,10 +72,13 @@ export default function CTAButton() {
               Are you sure you want to Logout?
             </h3>
             <div className="flex justify-center gap-4">
-              <Button color="failure" onClick={() => navigateTo("/login")}>
-                {"Yes, I'm sure"}
+              <Button
+                color="failure"
+                onClick={() => handleNavigation("/login")}
+              >
+                Yes, I'm sure
               </Button>
-              <Button color="gray" onClick={() => setOpenModal(false)}>
+              <Button color="gray" onClick={toggleModal}>
                 No, cancel
               </Button>
             </div>
