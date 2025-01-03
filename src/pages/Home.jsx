@@ -15,7 +15,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../components/ui/card"
+} from "../components/ui/card";
 
 function Home() {
   let [isOpen, setIsOpen] = useState(false);
@@ -106,20 +106,52 @@ function Home() {
   ];
   const home = false;
   return (
-    <div className="h-[100vh]">
-         <Card >
-      <CardHeader>
-        <CardTitle>Notifications</CardTitle>
-        <CardDescription>You have 3 unread messages.</CardDescription>
-      </CardHeader>
-      <CardContent className="grid gap-4">
-sdfasfd
-
-      </CardContent>
-      <CardFooter>
-       
-      </CardFooter>
-    </Card>
+    <div>
+      <div className="flex flex-wrap">
+        <Card className="m-4 w-[60%]">
+          <CardHeader>
+            <CardTitle>Notifications</CardTitle>
+            <CardDescription>You have 3 unread messages.</CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-4">sdfasfd</CardContent>
+          <CardFooter></CardFooter>
+        </Card>
+        <Card className="m-4 w-[30%]">
+          <h4>Calendar</h4>
+        </Card>
+      </div>
+      <div className="flex">
+        <Card className="m-4 w-[50%]">
+          <CardHeader>
+            <CardTitle>Coaches</CardTitle>
+            <CardDescription>You have 3 unread messages.</CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-4">sdfasfd</CardContent>
+          <CardFooter></CardFooter>
+        </Card>
+        <Card className="m-4 w-[50%]">
+          <CardHeader>
+            <CardTitle>Sales</CardTitle>
+            <CardDescription>You have 3 unread messages.</CardDescription>
+          </CardHeader>
+        </Card>
+      </div>
+      <div className="flex">
+        <Card className="m-4 w-[50%]">
+          <CardHeader>
+            <CardTitle>Active memebers</CardTitle>
+            <CardDescription>You have 3 unread messages.</CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-4">sdfasfd</CardContent>
+          <CardFooter></CardFooter>
+        </Card>
+        <Card className="m-4 w-[50%]">
+          <CardHeader>
+            <CardTitle>Inventories</CardTitle>
+            <CardDescription>You have 3 unread messages.</CardDescription>
+          </CardHeader>
+        </Card>
+      </div>
     </div>
   );
 }
