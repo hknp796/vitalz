@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Spinner } from "flowbite-react";
+import { LuDumbbell } from "react-icons/lu";
+import { Calendar } from "@/components/ui/calendar";
 
 import axios from "axios";
 import Table from "../components/Table";
@@ -107,26 +109,42 @@ function Home() {
   const home = false;
   return (
     <div>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap ">
         <Card className="m-4 w-[60%]">
           <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-            <CardDescription>You have 3 unread messages.</CardDescription>
+            <CardTitle>Welcome to Vitalz</CardTitle>
+            <CardDescription>
+              <div className="mt-2 flex justify-between gap-3 items-center">
+                <span>
+                  Effortlessly Manage Your Gym Like a Pro Track, streamline, and
+                  elevate your fitness business—all in one place.
+                </span>
+                <div>
+                  <LuDumbbell className="text-6xl text-black" />
+                </div>
+              </div>
+            </CardDescription>
           </CardHeader>
-          <CardContent className="grid gap-4">sdfasfd</CardContent>
+
           <CardFooter></CardFooter>
         </Card>
-        <Card className="m-4 w-[30%]">
-          <h4>Calendar</h4>
+        <Card className="m-4 border-none">
+          <Calendar
+            mode="single"
+            className="rounded-md border"
+          />
         </Card>
       </div>
       <div className="flex">
         <Card className="m-4 w-[50%]">
           <CardHeader>
             <CardTitle>Coaches</CardTitle>
-            <CardDescription>You have 3 unread messages.</CardDescription>
           </CardHeader>
-          <CardContent className="grid gap-4">sdfasfd</CardContent>
+          <CardContent className="grid gap-4">
+            <div>
+
+            </div>
+          </CardContent>
           <CardFooter></CardFooter>
         </Card>
         <Card className="m-4 w-[50%]">

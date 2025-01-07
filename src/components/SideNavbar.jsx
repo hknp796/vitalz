@@ -13,23 +13,24 @@ import { MdInventory } from "react-icons/md";
 import { FaDumbbell } from "react-icons/fa6";
 import { RiGitRepositoryFill } from "react-icons/ri";
 import { ImBook } from "react-icons/im";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const sidebarItems = [
   { link: "/", icon: HiChartPie, text: "Dashboard" },
   { link: "/inventories", icon: HiHome, text: "Admin Profile" },
-  { link: "/inventories", icon: HiPencilAlt, text: "Registration" },
-  { link: "/inventories", icon: ImBook, text: "Plan" },
+  { link: "/registration", icon: HiPencilAlt, text: "Registration" },
+  { link: "/plan", icon: ImBook, text: "Plan" },
   { link: "/billing", icon: HiCreditCard, text: "Payment" },
-  { link: "/inventories", icon: MdInventory, text: "Inventory" },
+  { link: "/inventory", icon: MdInventory, text: "Inventory" },
   { link: "/members", icon: HiUsers, text: "View Members" },
-  { link: "/inventories", icon: FaDumbbell, text: "Coaches" },
-  { link: "/inventories", icon: RiGitRepositoryFill, text: "Report" },
+  { link: "/coaches", icon: FaDumbbell, text: "Coaches" },
+  { link: "/report", icon: RiGitRepositoryFill, text: "Report" },
 ];
 
 export default function CTAButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation(); // Get the current route
 
   const handleNavigation = (path) => navigate(path);
 
@@ -40,16 +41,30 @@ export default function CTAButton() {
       <Sidebar className="h-screen">
         <Sidebar.Items className="flex flex-col h-[calc(100%-70px)] justify-between">
           <Sidebar.ItemGroup>
-            {sidebarItems.map(({ link, icon: Icon, text }, index) => (
-              <Sidebar.Item
-                key={index}
-                icon={Icon}
-                className="cursor-pointer"
-                onClick={() => handleNavigation(link)}
-              >
-                {text}
-              </Sidebar.Item>
-            ))}
+            {sidebarItems.map(({ link, icon: Icon, text }, index) => {
+              const isActive = location.pathname === link;
+
+              return (
+                <Sidebar.Item
+                  key={index}
+                  className={`cursor-pointer ${
+                    isActive
+                      ? "bg-blue-500 text-white hover:bg-blue-500"
+                      : "text-gray-700 "
+                  }`}
+                  onClick={() => handleNavigation(link)}
+                >
+                  <div className="flex items-center gap-2">
+                    <Icon
+                      className={`text-lg ${
+                        isActive ? "text-white" : "text-gray-700"
+                      }`}
+                    />
+                    {text}
+                  </div>
+                </Sidebar.Item>
+              );
+            })}
           </Sidebar.ItemGroup>
           <Sidebar.ItemGroup>
             <Sidebar.Item
