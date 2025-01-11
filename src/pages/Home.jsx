@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
-import { Spinner } from "flowbite-react";
 import { LuDumbbell } from "react-icons/lu";
 import { Calendar } from "@/components/ui/calendar";
 
 import axios from "axios";
-import Table from "../components/Table";
-import Tab from "../components/Tab";
-import { FaPlus, FaSearch } from "react-icons/fa";
-import MyModal from "../components/Modal";
-import SideCard from "../components/SideCard";
-import SideNavbar from "../components/SideNavbar";
+
 import {
   Card,
   CardContent,
@@ -18,6 +12,51 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
+
+import CoachTable from "../components/Datatable";
+const headers = [
+  { key: "name", label: "Name", className: "w-[150px]" },
+  { key: "email", label: "Email" },
+  { key: "mobile", label: "Mobile" },
+];
+
+const customers = [
+  {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    mobile: "+1 (555) 123-4567",
+  },
+  {
+    name: "Jane Smith",
+    email: "jane.smith@example.com",
+    mobile: "+1 (555) 234-5678",
+  },
+  {
+    name: "Michael Johnson",
+    email: "michael.johnson@example.com",
+    mobile: "+1 (555) 345-6789",
+  },
+  {
+    name: "Emily Davis",
+    email: "emily.davis@example.com",
+    mobile: "+1 (555) 456-7890",
+  },
+  {
+    name: "Chris Brown",
+    email: "chris.brown@example.com",
+    mobile: "+1 (555) 567-8901",
+  },
+  {
+    name: "Sophia Martinez",
+    email: "sophia.martinez@example.com",
+    mobile: "+1 (555) 678-9012",
+  },
+  {
+    name: "Liam Wilson",
+    email: "liam.wilson@example.com",
+    mobile: "+1 (555) 789-0123",
+  },
+];
 
 function Home() {
   let [isOpen, setIsOpen] = useState(false);
@@ -136,13 +175,13 @@ function Home() {
         </Card>
       </div>
       <div className="flex">
-        <Card className="m-4 w-[50%]">
+        <Card className="m-4 w-[70%] ">
           <CardHeader>
             <CardTitle>Coaches</CardTitle>
           </CardHeader>
-          <CardContent className="grid gap-4">
+          <CardContent className="grid gap-4 max-h-[250px] overflow-auto">
             <div>
-
+              <CoachTable data={customers} headers={headers}/>
             </div>
           </CardContent>
           <CardFooter></CardFooter>
