@@ -14,6 +14,7 @@ import {
 } from "../components/ui/card";
 
 import CoachTable from "../components/Datatable";
+import RadialChart from "../components/RadialChart";
 const headers = [
   { key: "name", label: "Name", className: "w-[150px]" },
   { key: "email", label: "Email" },
@@ -189,7 +190,9 @@ function Home() {
         <Card className="m-4 w-[50%]">
           <CardHeader>
             <CardTitle>Sales</CardTitle>
-            <CardDescription>You have 3 unread messages.</CardDescription>
+            <CardDescription>
+              <RadialChart />
+            </CardDescription>
           </CardHeader>
         </Card>
       </div>
