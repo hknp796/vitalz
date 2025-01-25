@@ -5,6 +5,36 @@ import { useNavigate } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 
 function ClientDetails() {
+
+ const headers = [
+     { accessorKey: "name", header: "Name" },
+     { accessorKey: "id", header: "Member Id" },
+     { accessorKey: "enrolled", header: "Date Enrolled" },
+     { accessorKey: "expiry", header: "Date Expiration" },
+     {
+         id: "action",
+         header: "Edit",
+         cell: ({ row }) => {
+             return (
+                 <Button
+                     className="h-8 w-8 p-0 bg-blue-500"
+                     onClick={() => {
+                         console.log("clicked")
+                     }}
+                 >
+                     Edit
+                 </Button>
+             )
+         },
+     },
+ ];
+
+  // Static data
+  const clients = [
+    { id: "23123412", name: "John Doe", enrolled: "Jan 10", expiry: "Feb 10" },
+    { id: "23123412", name: "John Doe", enrolled: "Jan 10", expiry: "Feb 10" },
+    { id: "23123412", name: "John Doe", enrolled: "Jan 10", expiry: "Feb 10" },
+  ];
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigateTo = useNavigate();
@@ -35,28 +65,8 @@ function ClientDetails() {
   ];
   return (
     <div className="w-full p-10">
-      <h3 className="font-semibold text-3xl">Members </h3>
-      <div className="flex justify-end">
-        <Button className="mb-2" onClick={() => navigateTo("/add-members")}>
-          Add New
-        </Button>
-      </div>
+      <DataTable data={clients} columns={headers} />
 
-      {loading ? (
-        <div className="flex items-center justify-center">
-          <Spinner
-            aria-label="Extra large spinner example"
-            className="flex justify-center"
-            size="xl"
-          />
-        </div>
-      ) : (
-        <DataTable
-          clients={members}
-          headers={tableHeaders}
-          getClient={getClient}
-        />
-      )}
     </div>
   );
 }
