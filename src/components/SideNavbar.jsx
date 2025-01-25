@@ -17,7 +17,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const sidebarItems = [
   { link: "/", icon: HiChartPie, text: "Dashboard" },
-  { link: "/inventories", icon: HiHome, text: "Admin Profile" },
+  { link: "/admin-profiles", icon: HiHome, text: "Admin Profile" },
   { link: "/registration", icon: HiPencilAlt, text: "Registration" },
   { link: "/plan", icon: ImBook, text: "Plan" },
   { link: "/billing", icon: HiCreditCard, text: "Payment" },

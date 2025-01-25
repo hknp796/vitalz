@@ -8,6 +8,7 @@ import Toast from "./components/Toast";
 import Dashboard from "./pages/Dashboard";
 import ClientDetails from "./pages/Members";
 import Inventories from "./pages/Inventories";
+import AdminProfiles from "./pages/AdminProfiles";
 import Billing from "./pages/Billing";
 import AddMember from "./pages/AddNewMember";
 import ViewMember from "./pages/viewMember";
@@ -28,7 +29,7 @@ function App() {
     { path: "/dashboard", element: <Dashboard /> },
     { path: "/members", element: <ClientDetails /> },
     { path: "/billing", element: <Billing /> },
-    { path: "/inventories", element: <Inventories /> },
+    { path: "/admin-profiles", element: <AdminProfiles /> },
     { path: "/add-members", element: <AddMember /> },
     { path: "/add-members/:id", element: <AddMember /> },
     { path: "/members/view/:id", element: <ViewMember /> },
