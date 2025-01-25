@@ -20,7 +20,7 @@ const sidebarItems = [
   { link: "/admin-profiles", icon: HiHome, text: "Admin Profile" },
   { link: "/registration", icon: HiPencilAlt, text: "Registration" },
   { link: "/plan", icon: ImBook, text: "Plan" },
-  { link: "/billing", icon: HiCreditCard, text: "Payment" },
+  { link: "/payment", icon: HiCreditCard, text: "Payment" },
   { link: "/inventory", icon: MdInventory, text: "Inventory" },
   { link: "/members", icon: HiUsers, text: "View Members" },
   { link: "/coaches", icon: FaDumbbell, text: "Coaches" },

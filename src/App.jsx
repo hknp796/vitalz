@@ -12,6 +12,7 @@ import AdminProfiles from "./pages/AdminProfiles";
 import Registration from "./pages/Registraion";
 import Billing from "./pages/Billing";
 import Plan from "./pages/Plan";
+import Payment from "./pages/Payment";
 import ViewMember from "./pages/viewMember";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -33,6 +34,7 @@ function App() {
     { path: "/admin-profiles", element: <AdminProfiles /> },
     { path: "/registration", element: <Registration /> },
     { path: "/plan", element: <Plan /> },
+    { path: "/payment", element: <Payment /> },
     // { path: "/add-members/:id", element: <AddMember /> },
     { path: "/members/view/:id", element: <ViewMember /> },
     { path: "/", element: <Home /> },
