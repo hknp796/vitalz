@@ -7,12 +7,13 @@ import Toast from "./components/Toast";
 // Pages
 import Dashboard from "./pages/Dashboard";
 import ClientDetails from "./pages/Members";
-import Inventories from "./pages/Inventories";
+import Inventories from "./pages/Inventory";
 import AdminProfiles from "./pages/AdminProfiles";
 import Registration from "./pages/Registraion";
 import Billing from "./pages/Billing";
 import Plan from "./pages/Plan";
 import Payment from "./pages/Payment";
+import Inventory from "./pages/Inventory";
 import ViewMember from "./pages/viewMember";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -35,6 +36,7 @@ function App() {
     { path: "/registration", element: <Registration /> },
     { path: "/plan", element: <Plan /> },
     { path: "/payment", element: <Payment /> },
+    { path: "/inventory", element: <Inventory /> },
     // { path: "/add-members/:id", element: <AddMember /> },
     { path: "/members/view/:id", element: <ViewMember /> },
     { path: "/", element: <Home /> },
