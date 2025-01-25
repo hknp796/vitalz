@@ -11,7 +11,7 @@ import Inventories from "./pages/Inventories";
 import AdminProfiles from "./pages/AdminProfiles";
 import Registration from "./pages/Registraion";
 import Billing from "./pages/Billing";
-import AddMember from "./pages/AddNewMember";
+import Plan from "./pages/Plan";
 import ViewMember from "./pages/viewMember";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -32,8 +32,8 @@ function App() {
     { path: "/billing", element: <Billing /> },
     { path: "/admin-profiles", element: <AdminProfiles /> },
     { path: "/registration", element: <Registration /> },
-    { path: "/add-members", element: <AddMember /> },
-    { path: "/add-members/:id", element: <AddMember /> },
+    { path: "/plan", element: <Plan /> },
+    // { path: "/add-members/:id", element: <AddMember /> },
     { path: "/members/view/:id", element: <ViewMember /> },
     { path: "/", element: <Home /> },
   ];

@@ -12,7 +12,7 @@ import {
   CardTitle,
 } from "../components/ui/card";
 
-import DataTable from "../components/Datatable";
+import DataTable from "../components/Table";
 import RadialChart from "../components/RadialChart";
 
 // Table headers
