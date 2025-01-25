@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
-import DataTable from "../components/Datatable.tsx";
+import DataTable from "../components/Datatable.jsx";
 
 const clients = [
   { id: "23123412", name: "1 Month", validity: "1", amount: "500" },
