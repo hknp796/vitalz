@@ -15,6 +15,7 @@ import Plan from "./pages/Plan";
 import Payment from "./pages/Payment";
 import Inventory from "./pages/Inventory";
 import Coaches from "./pages/Coaches";
+import Report from "./pages/Report";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 
@@ -38,6 +39,7 @@ function App() {
     { path: "/payment", element: <Payment /> },
     { path: "/inventory", element: <Inventory /> },
     { path: "/coaches", element: <Coaches /> },
+    { path: "/report", element: <Report /> },
     { path: "/", element: <Home /> },
   ];
 
