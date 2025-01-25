@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import ClientDetails from "./pages/Members";
 import Inventories from "./pages/Inventories";
 import AdminProfiles from "./pages/AdminProfiles";
+import Registration from "./pages/Registraion";
 import Billing from "./pages/Billing";
 import AddMember from "./pages/AddNewMember";
 import ViewMember from "./pages/viewMember";
@@ -30,6 +31,7 @@ function App() {
     { path: "/members", element: <ClientDetails /> },
     { path: "/billing", element: <Billing /> },
     { path: "/admin-profiles", element: <AdminProfiles /> },
+    { path: "/registration", element: <Registration /> },
     { path: "/add-members", element: <AddMember /> },
     { path: "/add-members/:id", element: <AddMember /> },
     { path: "/members/view/:id", element: <ViewMember /> },
