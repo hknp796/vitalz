@@ -1,19 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  value: 0,
+  value: false,
 }
 
-export const counterSlice = createSlice({
-  name: 'counter',
+export const navbarSlice = createSlice({
+  name: 'navbar',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1
+    isNavbarOpen: (state,action) => {
+      state.value  = action.payload
     },
   },
 })
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const { isNavbarOpen } = navbarSlice.actions
 
-export default counterSlice.reducer
+export default navbarSlice.reducer

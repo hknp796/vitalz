@@ -7,7 +7,6 @@ import CustomTabs from "../components/Tabs";
 import Navbar from "../components/TopNavbar";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-import { decrement, increment } from "./../redux/counter";
 
 function Dashboard() {
   const count = useSelector((state) => state.counter.value);

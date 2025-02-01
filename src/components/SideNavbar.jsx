@@ -1,5 +1,8 @@
 import { Sidebar, Modal, Button } from "flowbite-react";
 import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import {  isNavbarOpen } from '../redux/counter'
+
 import {
   HiChartPie,
   HiUsers,
@@ -13,6 +16,7 @@ import { MdInventory } from "react-icons/md";
 import { FaDumbbell } from "react-icons/fa6";
 import { RiGitRepositoryFill } from "react-icons/ri";
 import { ImBook } from "react-icons/im";
+import { HiMenu } from "react-icons/hi";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const sidebarItems = [
@@ -31,14 +35,28 @@ export default function CTAButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation(); // Get the current route
+  const isSidebarOpen = useSelector((state) => state.counter.value)
+  const dispatch = useDispatch()
 
-  const handleNavigation = (path) => navigate(path);
 
+  const handleNavigation = (path) => {
+    dispatch(isNavbarOpen(false))
+    navigate(path);
+  };
+
+  const toggleSidebar = () =>  {
+    dispatch(isNavbarOpen(false))
+  }
+  ;
   const toggleModal = () => setIsModalOpen((prev) => !prev);
 
   return (
-    <div>
-      <Sidebar className="h-screen">
+    <div className="relative">
+      <Sidebar
+        className={`fixed md:relative top-0 left-0 z-50 h-full w-64 bg-white shadow-lg transition-transform duration-300 ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0 md:block`}
+      >
         <Sidebar.Items className="flex flex-col h-[calc(100%-70px)] justify-between">
           <Sidebar.ItemGroup>
             {sidebarItems.map(({ link, icon: Icon, text }, index) => {
@@ -78,6 +96,7 @@ export default function CTAButton() {
         </Sidebar.Items>
       </Sidebar>
 
+      {/* Modal */}
       <Modal show={isModalOpen} size="md" onClose={toggleModal} popup>
         <Modal.Header />
         <Modal.Body>
@@ -100,6 +119,14 @@ export default function CTAButton() {
           </div>
         </Modal.Body>
       </Modal>
+
+      {/* Overlay for Sidebar */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          onClick={toggleSidebar}
+        />
+      )}
     </div>
   );
 }

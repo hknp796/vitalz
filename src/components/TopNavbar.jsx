@@ -1,13 +1,27 @@
 import { Avatar, Dropdown, Navbar, Popover } from "flowbite-react";
 import { IoIosNotifications } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { HiMenu } from "react-icons/hi";
+import { useDispatch } from 'react-redux'
+import {  isNavbarOpen } from '../redux/counter'
+
 
 export default function Component() {
+  const dispatch = useDispatch()
   const navigateTo = useNavigate();
+  const toggleSidebar = () => {
+    dispatch(isNavbarOpen(true))
+  };
 
   return (
     <Navbar className="bg-gray-50  ">
       <div className="flex justify-between w-full">
+            <div className="block md:hidden p-2">
+                <HiMenu
+                  className="text-2xl cursor-pointer"
+                  onClick={toggleSidebar}
+                />
+              </div>
         <h2
           onClick={() => navigateTo("/")}
           className="font-bold text-3xl text-center bg-gray-50 text-gray-900 "
