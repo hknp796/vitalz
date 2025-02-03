@@ -7,7 +7,6 @@ import Toast from "./components/Toast";
 // Pages
 import Dashboard from "./pages/Dashboard";
 import ClientDetails from "./pages/Members";
-import Inventories from "./pages/Inventory";
 import AdminProfiles from "./pages/AdminProfiles";
 import Registration from "./pages/Registraion";
 import Billing from "./pages/Billing";

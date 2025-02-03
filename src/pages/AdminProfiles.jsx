@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
 import { Label } from "@/components/ui/label"
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -14,7 +15,60 @@ import {
 import { RxAvatar } from "react-icons/rx";
 import { FaRegEdit } from "react-icons/fa";
 
+
 const AdminPage = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    number: "",
+    password: "",
+  });
+
+  // State for form submission
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  // Handle input change
+  const handleChange = (event) => {
+    const { id, value } = event.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
+  // Handle form submission
+  const handleAdminCreation = async (event) => {
+    event.preventDefault();
+
+    // Validate form inputs
+    if (!formData.name || !formData.email || !formData.number || !formData.password) {
+      setMessage("All fields are required!");
+      return;
+    }
+
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const response = await fetch("/api/admins", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setMessage("Admin account created successfully!");
+        setFormData({ name: "", email: "", number: "", password: "" });
+      } else {
+        setMessage("Failed to create admin account.");
+      }
+    } catch (error) {
+      setMessage("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="p-3  min-h-screen">
       <div className=" mx-auto grid gap-6 lg:grid-cols-3">
@@ -75,6 +129,7 @@ const AdminPage = () => {
                   <Input
                     id="name"
                     className="col-span-3"
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -85,6 +140,7 @@ const AdminPage = () => {
                   <Input
                     id="email"
                     className="col-span-3"
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="grid grid-cols-4 items-center gap-4">
@@ -94,6 +150,7 @@ const AdminPage = () => {
                   <Input
                     id="number"
                     className="col-span-3"
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="grid grid-cols-4 items-center gap-4">
@@ -103,11 +160,12 @@ const AdminPage = () => {
                   <Input
                     id="password"
                     className="col-span-3"
+                    onChange={handleChange}
                   />
                 </div>
               </div>
               <DialogFooter>
-                <Button type="submit" className='bg-black'>Save changes</Button>
+                <Button type="submit" className='bg-black' onClick={handleAdminCreation}>Save changes</Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
