@@ -2,8 +2,18 @@ import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
+import { Label } from "@/components/ui/label"
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { RxAvatar } from "react-icons/rx";
 import { FaRegEdit } from "react-icons/fa";
+
 const AdminPage = () => {
   return (
     <div className="p-3  min-h-screen">
@@ -30,26 +40,78 @@ const AdminPage = () => {
             <div className="flex flex-col gap-4">
               <CardDescription className="flex justify-between">
                 <strong>Username:</strong> <span>
-                   JuanDelaCruz
-                  </span>
+                  JuanDelaCruz
+                </span>
               </CardDescription>
               <CardDescription className="flex justify-between">
                 <strong>Contact no.:</strong> <span>
                   09123456789
-                  </span> 
+                </span>
               </CardDescription>
               <CardDescription className="flex justify-between">
                 <strong>Email Address:</strong> <span>
-                   juan.delacruz@gmail.com
-                  </span>
+                  juan.delacruz@gmail.com
+                </span>
               </CardDescription>
             </div>
           </CardContent>
-          <div className="p-4">
-            <Button className="w-full bg-blue-500">
-              Register New Admin Account
-            </Button>
-          </div>
+          <Dialog>
+            <DialogTrigger asChild>
+              <div className="p-4">
+                <Button className="w-full bg-blue-500">
+                  Register New Admin Account
+                </Button>
+              </div>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Create Admin</DialogTitle>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="name" className="text-right">
+                    Name
+                  </Label>
+                  <Input
+                    id="name"
+                    className="col-span-3"
+                  />
+                </div>
+
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="email" className="text-right">
+                    Email
+                  </Label>
+                  <Input
+                    id="email"
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="number" className="text-right">
+                    Number
+                  </Label>
+                  <Input
+                    id="number"
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="password" className="text-right">
+                    Password
+                  </Label>
+                  <Input
+                    id="password"
+                    className="col-span-3"
+                  />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button type="submit" className='bg-black'>Save changes</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
         </Card>
 
         {/* Update Details Form */}
