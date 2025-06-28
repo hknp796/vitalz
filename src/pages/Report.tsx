@@ -36,18 +36,34 @@ const headers = [
       },
   },
 ];
+interface User {
+    firstName: string;
+    lastName: string;
+    gender: string;
+    age: string;
+    contact: string;
+    dateOfJoining?: string;
+    dateOfBirth?: string;
+    validity?: string;
+    amount?: string;
+    from: string;
+    to: string;
+}
 
 function NewMemberForm() {
     const { id } = useParams();
     const navigateTo = useNavigate();
 
-    const [inputValues, setInputValues] = useState({
+    const [inputValues, setInputValues] = useState<User>({
         firstName: "",
         lastName: "",
         gender: "",
         age: "",
         contact: "",
+        from: "",
+        to: "",
     });
+
     const [dateOfJoining, setJoiningDate] = useState("");
     const [dateOfBirth, setBirthDate] = useState("");
     const [loading, setLoading] = useState(false);
@@ -119,37 +135,25 @@ function NewMemberForm() {
                     <form className="space-y-6" onSubmit={submitForm}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <Label htmlFor="firstName">Name</Label>
+                                <Label htmlFor="firstName">From Date</Label>
                                 <Input
                                     id="name"
                                     name="name"
-                                    type="text"
-                                    value={inputValues.validity}
+                                    type="date"
+                                    value={inputValues.from}
                                     onChange={handleJoiningDate}
                                     required
                                 />
                             </div>
 
                             <div>
-                                <Label htmlFor="validity">Contact</Label>
+                                <Label htmlFor="validity">To Date</Label>
                                 <Input
                                     id="validity"
                                     name="validity"
-                                    type="text"
-                                    value={inputValues.validity}
-                                    onChange={handleJoiningDate}
-                                    required
-                                />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="amount">Date of Join</Label>
-                                <Input
-                                    id="status"
-                                    name="status"
                                     type="date"
-                                    value={inputValues.status}
-                                    onChange={handleInputChange}
+                                    value={inputValues.to}
+                                    onChange={handleJoiningDate}
                                     required
                                 />
                             </div>
@@ -157,7 +161,7 @@ function NewMemberForm() {
 
                         <div className="flex justify-end space-x-4">
                             <Button type="submit" className="bg-blue-500 text-white">
-                                {loading ? "Loading..." : id ? "Update" : "Save"}
+                                {loading ? "Loading..." : id ? "Update" : "Submit"}
                             </Button>
                             <Button type="button" variant="outline" >
                                 Cancel

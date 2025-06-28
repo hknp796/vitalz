@@ -7,20 +7,51 @@ import { Label } from "@/components/ui/label";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
+import DataTable from "../components/Datatable.jsx";
 
+interface User {
+    firstName: string;
+    lastName: string;
+    gender: string;
+    age: string;
+    contact: string;
+    validity?: string;
+    amount?: string;
+}
+const clients = [
+    { id: "23123412", name: "1 Month", validity: "1", amount: "500" },
+    { id: "23123412", name: "3 Month", validity: "1", amount: "500" },
+    { id: "23123412", name: "6 Month", validity: "1", amount: "500" },
+    { id: "23123412", name: "12 Month", validity: "1", amount: "500" },
+];
+
+const headers = [
+    { accessorKey: "name", header: "Plan Name" },
+    { accessorKey: "validity", header: "Validity" },
+    { accessorKey: "amount", header: "Amount" },
+    {
+        id: "action",
+        header: "Edit",
+        cell: ({ row }) => {
+            return (
+                <Button
+                    className="h-8 w-8 p-0 bg-blue-500"
+                    onClick={() => {
+                        console.log("clicked")
+                    }}
+                >
+                    Edit
+                </Button>
+            )
+        },
+    },
+];
 
 function NewMemberForm() {
     const { id } = useParams();
     const navigateTo = useNavigate();
 
-    const [inputValues, setInputValues] = useState({
+    const [inputValues, setInputValues] = useState<User>({
         firstName: "",
         lastName: "",
         gender: "",
@@ -92,25 +123,25 @@ function NewMemberForm() {
         <div className="p-6 flex flex-col gap-3">
             <Card>
                 <CardHeader>
-                    <CardTitle>Add Payment</CardTitle>
+                    <CardTitle>Add Plan</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <form className="space-y-6" onSubmit={submitForm}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <Label htmlFor="firstName">Name of Member</Label>
-                                <Select>
-                                    <SelectTrigger className="">
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="light">Light</SelectItem>
-                                    </SelectContent>
-                                </Select>
-
+                                <Label htmlFor="firstName">Plan Name</Label>
+                                <Input
+                                    id="planName"
+                                    name="planName"
+                                    type="text"
+                                    value={inputValues.firstName}
+                                    onChange={handleInputChange}
+                                    required
+                                />
                             </div>
 
                             <div>
-                                <Label htmlFor="validity">Plan</Label>
+                                <Label htmlFor="validity">Validity</Label>
                                 <Input
                                     id="validity"
                                     name="validity"
@@ -132,18 +163,6 @@ function NewMemberForm() {
                                     required
                                 />
                             </div>
-
-                            <div>
-                                <Label htmlFor="amount">Date of Join</Label>
-                                <Input
-                                    id="amount"
-                                    name="amount"
-                                    type="date"
-                                    value={inputValues.amount}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </div>
                         </div>
 
                         <div className="flex justify-end space-x-4">
@@ -157,6 +176,7 @@ function NewMemberForm() {
                     </form>
                 </CardContent>
             </Card>
+            <DataTable data={clients} columns={headers} />
         </div>
     );
 }

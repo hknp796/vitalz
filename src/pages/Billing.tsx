@@ -4,7 +4,17 @@ import Chart from '../components/barchart'
 import Doughnut from '../components/Doughnut';
 
 function Billing() {
-  const clients = [
+  
+  interface Client {
+    id: number;
+    name: string;
+    amount: number;
+    description: string;
+    status: string;
+    billingStatus?: string; // Optional property for billing status
+  }
+
+  const clients: Client[] = [
     { id: 1, name: 'John Doe', amount: 30, description: '', status: 'Active' },
     { id: 2, name: 'Jane Smith', amount: 25, description: '', status: 'Inactive' },
   ]

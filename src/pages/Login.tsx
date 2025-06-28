@@ -21,8 +21,8 @@ function Login() {
         email: email,
         password: password,
       },
-      successCallBack: ({ message }) => {
-        useSaveToken(null);
+      successCallBack: ({ message }: { message: string }) => {
+        // useSaveToken(null);
         // navigate("/");
         toast.success(message);
       },

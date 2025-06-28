@@ -8,11 +8,25 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 
+interface User {
+  firstName: string;
+  lastName: string;
+  gender: string;
+  age: string;
+  contact: string;
+  dateOfJoining?: string;
+  dateOfBirth?: string;
+  validity?: string;
+  amount?: string;
+  plan?: string;
+  price?: string;
+}
+
 function NewMemberForm() {
   const { id } = useParams();
   const navigateTo = useNavigate();
 
-  const [inputValues, setInputValues] = useState({
+  const [inputValues, setInputValues] = useState<User>({
     firstName: "",
     lastName: "",
     gender: "",

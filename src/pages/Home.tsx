@@ -48,15 +48,23 @@ const inventory = [
   { id: "32232dfa", equipment: "Rowing Machine", total: 8, status: "Available" },
 ];
 
+interface User  {
+  id: number;
+  name: string;
+  email: string;
+  mobile?: string;
+  // Add other fields as needed
+};
+
 function Home() {
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState<User[]>([]);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchData("https://dummyjson.com/users", 6);
   }, []);
 
-  const fetchData = (url, limit) => {
+  const fetchData = (url : string, limit : number) => {
     setLoading(true);
     axios
       .get(url)
@@ -68,7 +76,7 @@ function Home() {
       .finally(() => setLoading(false));
   };
 
-  const handleDeleteUser = (id) => {
+  const handleDeleteUser = (id: number) => {
     setUserData((prevData) => prevData.filter((user) => user.id !== id));
   };
 

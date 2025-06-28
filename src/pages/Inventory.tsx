@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import moment from "moment";
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -9,41 +8,61 @@ import { useNavigate, useParams } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 import DataTable from "../components/Datatable.jsx";
 
+// Define User type to fix the error
+type User = {
+    firstName: string;
+    lastName: string;
+    gender: string;
+    age: string;
+    contact: string;
+    dateOfJoining?: string;
+    dateOfBirth?: string;
+    validity?: string;
+    status?: string;
+    [key: string]: any;
+};
+
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+} from "@/components/ui/select"
 
 const clients = [
-    { id: "23123412", name: "1 Month", validity: "1", amount: "500" },
-    { id: "23123412", name: "3 Month", validity: "1", amount: "500" },
-    { id: "23123412", name: "6 Month", validity: "1", amount: "500" },
-    { id: "23123412", name: "12 Month", validity: "1", amount: "500" },
+  { id: "23123412", name: "1 Month", validity: "1", amount: "500" },
+  { id: "23123412", name: "3 Month", validity: "1", amount: "500" },
+  { id: "23123412", name: "6 Month", validity: "1", amount: "500" },
+  { id: "23123412", name: "12 Month", validity: "1", amount: "500" },
 ];
 
 const headers = [
-    { accessorKey: "name", header: "Plan Name" },
-    { accessorKey: "validity", header: "Validity" },
-    { accessorKey: "amount", header: "Amount" },
-    {
-        id: "action",
-        header: "Edit",
-        cell: ({ row }) => {
-            return (
-                <Button
-                    className="h-8 w-8 p-0 bg-blue-500"
-                    onClick={() => {
-                        console.log("clicked")
-                    }}
-                >
-                    Edit
-                </Button>
-            )
-        },
-    },
+  { accessorKey: "name", header: "Name of Equipment" },
+  { accessorKey: "validity", header: "Total Number" },
+  { accessorKey: "amount", header: "Status" },
+  {
+      id: "action",
+      header: "Edit",
+      cell: ({ row }: { row: any }) => {
+          return (
+              <Button
+                  className="h-8 w-8 p-0 bg-blue-500"
+                  onClick={() => {
+                      console.log("clicked")
+                  }}
+              >
+                  Edit
+              </Button>
+          )
+      },
+  },
 ];
 
 function NewMemberForm() {
     const { id } = useParams();
     const navigateTo = useNavigate();
 
-    const [inputValues, setInputValues] = useState({
+    const [inputValues, setInputValues] = useState<User>({
         firstName: "",
         lastName: "",
         gender: "",
@@ -54,7 +73,7 @@ function NewMemberForm() {
     const [dateOfBirth, setBirthDate] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const handleInputChange = (event) => {
+    const handleInputChange = (event : React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setInputValues((prev) => ({
             ...prev,
@@ -62,22 +81,22 @@ function NewMemberForm() {
         }));
     };
 
-    const handleJoiningDate = (event) => {
+    const handleJoiningDate = (event: React.ChangeEvent<HTMLInputElement>) => {
         setJoiningDate(event.target.value);
     };
 
-    const handleBirthDate = (event) => {
+    const handleBirthDate = (event: React.ChangeEvent<HTMLInputElement>) => {
         setBirthDate(event.target.value);
     };
 
-    const submitForm = (event) => {
+    const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const form = { ...inputValues, dateOfBirth, dateOfJoining };
         const axiosConfig = {
             method: id ? "put" : "post",
             url: id ? `/members/update/${id}` : "/members",
             body: form,
-            successCallBack: ({ message }) => {
+            successCallBack: ({ message }: { message: string }) => {
                 toast.success(message);
                 navigateTo("/members");
             },
@@ -95,13 +114,13 @@ function NewMemberForm() {
             useAxios({
                 method: "get",
                 url: `/members/${id}`,
-                successCallBack: ({ data }) => {
+                successCallBack: ({ data }: { data: User }) => {
                     setInputValues((prev) => ({
                         ...prev,
                         ...data,
                     }));
-                    setJoiningDate(data.dateOfJoining);
-                    setBirthDate(data.dateOfBirth);
+                    setJoiningDate(data.dateOfJoining ?? '');
+                    setBirthDate(data.dateOfBirth ?? '');
                 },
             });
         }
@@ -115,25 +134,25 @@ function NewMemberForm() {
         <div className="p-6 flex flex-col gap-3">
             <Card>
                 <CardHeader>
-                    <CardTitle>Add Plan</CardTitle>
+                    <CardTitle>Add Inventory</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <form className="space-y-6" onSubmit={submitForm}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <Label htmlFor="firstName">Plan Name</Label>
-                                <Input
-                                    id="planName"
-                                    name="planName"
-                                    type="text"
-                                    value={inputValues.firstName}
-                                    onChange={handleInputChange}
-                                    required
-                                />
+                                <Label htmlFor="firstName">Name of Equipement</Label>
+                                <Select>
+                                    <SelectTrigger className="">
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="light">Light</SelectItem>
+                                    </SelectContent>
+                                </Select>
+
                             </div>
 
                             <div>
-                                <Label htmlFor="validity">Validity</Label>
+                                <Label htmlFor="validity">Total Number</Label>
                                 <Input
                                     id="validity"
                                     name="validity"
@@ -145,12 +164,12 @@ function NewMemberForm() {
                             </div>
 
                             <div>
-                                <Label htmlFor="amount">Amount</Label>
+                                <Label htmlFor="amount">Status</Label>
                                 <Input
-                                    id="amount"
-                                    name="amount"
+                                    id="status"
+                                    name="status"
                                     type="number"
-                                    value={inputValues.amount}
+                                    value={inputValues.status}
                                     onChange={handleInputChange}
                                     required
                                 />
@@ -168,7 +187,7 @@ function NewMemberForm() {
                     </form>
                 </CardContent>
             </Card>
-            <DataTable data={clients} columns={headers} />
+             <DataTable data={clients} columns={headers} />
         </div>
     );
 }

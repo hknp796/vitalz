@@ -8,13 +8,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 import DataTable from "../components/Datatable.jsx";
 
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-} from "@/components/ui/select"
-
 const clients = [
   { id: "23123412", name: "1 Month", validity: "1", amount: "500" },
   { id: "23123412", name: "3 Month", validity: "1", amount: "500" },
@@ -23,9 +16,9 @@ const clients = [
 ];
 
 const headers = [
-  { accessorKey: "name", header: "Name of Equipment" },
-  { accessorKey: "validity", header: "Total Number" },
-  { accessorKey: "amount", header: "Status" },
+  { accessorKey: "name", header: "Name" },
+  { accessorKey: "validity", header: "Contact" },
+  { accessorKey: "amount", header: "Date of Join" },
   {
       id: "action",
       header: "Edit",
@@ -44,17 +37,32 @@ const headers = [
   },
 ];
 
+interface User {
+    firstName: string;
+    lastName: string;
+    gender: string;
+    age: string;
+    contact: string;
+    validity: string;
+    amount?: string;
+    status: string;
+
+}
+
 function NewMemberForm() {
     const { id } = useParams();
     const navigateTo = useNavigate();
 
-    const [inputValues, setInputValues] = useState({
+    const [inputValues, setInputValues] = useState<User>({
         firstName: "",
         lastName: "",
         gender: "",
         age: "",
         contact: "",
+        validity: "",
+        status: "",
     });
+    
     const [dateOfJoining, setJoiningDate] = useState("");
     const [dateOfBirth, setBirthDate] = useState("");
     const [loading, setLoading] = useState(false);
@@ -120,25 +128,25 @@ function NewMemberForm() {
         <div className="p-6 flex flex-col gap-3">
             <Card>
                 <CardHeader>
-                    <CardTitle>Add Inventory</CardTitle>
+                    <CardTitle>Add Coach</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <form className="space-y-6" onSubmit={submitForm}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <Label htmlFor="firstName">Name of Equipement</Label>
-                                <Select>
-                                    <SelectTrigger className="">
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="light">Light</SelectItem>
-                                    </SelectContent>
-                                </Select>
-
+                                <Label htmlFor="firstName">Name</Label>
+                                <Input
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    value={inputValues.validity}
+                                    onChange={handleJoiningDate}
+                                    required
+                                />
                             </div>
 
                             <div>
-                                <Label htmlFor="validity">Total Number</Label>
+                                <Label htmlFor="validity">Contact</Label>
                                 <Input
                                     id="validity"
                                     name="validity"
@@ -150,11 +158,11 @@ function NewMemberForm() {
                             </div>
 
                             <div>
-                                <Label htmlFor="amount">Status</Label>
+                                <Label htmlFor="amount">Date of Join</Label>
                                 <Input
                                     id="status"
                                     name="status"
-                                    type="number"
+                                    type="date"
                                     value={inputValues.status}
                                     onChange={handleInputChange}
                                     required
