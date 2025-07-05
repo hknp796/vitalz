@@ -76,22 +76,22 @@ function NewMemberForm() {
         }));
     };
 
-    const handleJoiningDate = (event) => {
+    const handleJoiningDate = (event: React.ChangeEvent<HTMLInputElement>) => {
         setJoiningDate(event.target.value);
     };
 
-    const handleBirthDate = (event) => {
+    const handleBirthDate = (event: React.ChangeEvent<HTMLInputElement>) => {
         setBirthDate(event.target.value);
     };
 
-    const submitForm = (event) => {
+    const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const form = { ...inputValues, dateOfBirth, dateOfJoining };
         const axiosConfig = {
             method: id ? "put" : "post",
             url: id ? `/members/update/${id}` : "/members",
             body: form,
-            successCallBack: ({ message }) => {
+            successCallBack: ({ message } : { message: string }) => {
                 toast.success(message);
                 navigateTo("/members");
             },
