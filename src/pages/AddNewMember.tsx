@@ -7,12 +7,21 @@ import { Datepicker } from "flowbite-react";
 import { Spinner } from "flowbite-react";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+
+interface MemberFormProps {
+  firstName: string;
+  lastName: string;
+  age: string;
+  contact: string;
+  gender: string;
+}
+
 function NewMemberForm() {
   const { id } = useParams();
   const navigateTo = useNavigate();
   const params = useParams();
 
-  const [inputValues, setInputValues] = useState({
+  const [inputValues, setInputValues] = useState<MemberFormProps>({
     firstName: "",
     lastName: "",
     gender: "",
@@ -23,7 +32,7 @@ function NewMemberForm() {
   const [dateOfBirth, setBirthDate] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event : React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setInputValues({
       ...inputValues,
@@ -31,12 +40,12 @@ function NewMemberForm() {
     });
   };
 
-  const handleJoiningDate = (date) => {
+  const handleJoiningDate = (date : Date) => {
    const formatedDate =  moment(date).format('DD-MM-YYYY')
     setJoiningDate(formatedDate);
   };
 
-  const handleBirthDate = (date) => {
+  const handleBirthDate = (date : Date) => {
    const formatedDate =  moment(date).format('DD-MM-YYYY')
     setBirthDate(formatedDate);
   };
@@ -47,7 +56,7 @@ function NewMemberForm() {
         method: "put",
         url: `/members/update/${id}`,
         body: form,
-        successCallBack: ({ message }) => {
+        successCallBack: ({ message } : { message: string }) => {
           toast.success(message);
           navigateTo("/members");
         },
@@ -58,7 +67,7 @@ function NewMemberForm() {
         method: "post",
         url: `/members`,
         body: form,
-        successCallBack: ({ message }) => {
+        successCallBack: ({ message } : { message: string }) => {
           toast.success(message);
           navigateTo("/members");
         },
@@ -72,8 +81,7 @@ function NewMemberForm() {
       useAxios({
         method: "get",
         url: `/members/${params.id}`,
-        successCallBack: ({ data }) => {
-          console.log({data});
+        successCallBack: ({ data } : { data: any }) => {
           setInputValues(data);
           setJoiningDate(data.dateOfJoining)
           setBirthDate(data.dateOfBirth)

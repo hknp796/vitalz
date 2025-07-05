@@ -35,11 +35,11 @@ export default function CTAButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation(); // Get the current route
-  const isSidebarOpen = useSelector((state) => state.counter.value)
+  const isSidebarOpen = useSelector((state: any) => state.counter.value)
   const dispatch = useDispatch()
 
 
-  const handleNavigation = (path) => {
+  const handleNavigation = (path :string)  => {
     dispatch(isNavbarOpen(false))
     navigate(path);
   };
